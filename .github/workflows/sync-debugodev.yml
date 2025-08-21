@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     
-    - name: Configure Git
+    - name: Configure git
       run: |
         git config --global user.name "loregbrw"
         git config --global user.email "loregobara@gmail.com"
