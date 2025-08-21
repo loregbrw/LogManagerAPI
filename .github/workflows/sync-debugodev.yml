@@ -1,0 +1,30 @@
+name: Sync DebugoDev Fork
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  sync-fork:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    
+    - name: Configure Git
+      run: |
+        git config --global user.name "loregbrw"
+        git config --global user.email "loregobara@gmail.com"
+    
+    - name: Add organization remote
+      run: |
+        git remote add fork https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/DebugoDev/TecnoToolingIO-API.git
+    
+    - name: Push to organization fork
+      run: |
+        git push fork main:main
