@@ -27,4 +27,4 @@ jobs:
     
     - name: Push to organization fork
       run: |
-        git push fork main:main --force
+        git push fork main:main --no-verify
