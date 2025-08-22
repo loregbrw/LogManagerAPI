@@ -26,6 +26,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
 
 builder.Services
+    .AddDatabase(builder.Configuration)
     .AddMainConfigs();
 
 var app = builder.Build();
