@@ -19,15 +19,9 @@
     Contact: loregobara@gmail.com
 */
 
-using Microsoft.EntityFrameworkCore;
+namespace Application.Interfaces.Providers;
 
-namespace Infrastructure;
-
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public interface IDateTimeProvider
 {
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
-    }
+    DateTime UtcNow { get; }
 }

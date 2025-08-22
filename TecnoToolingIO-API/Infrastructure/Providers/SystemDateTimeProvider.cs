@@ -19,11 +19,12 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Application.Enums;
+namespace Infrastructure.Providers;
 
-public enum ERole
+using System;
+using Application.Interfaces.Providers;
+
+public class SystemDateTimeProvider : IDateTimeProvider
 {
-    ADMIN,
-    MANAGER,
-    USER
+    public DateTime UtcNow => DateTime.UtcNow;
 }
