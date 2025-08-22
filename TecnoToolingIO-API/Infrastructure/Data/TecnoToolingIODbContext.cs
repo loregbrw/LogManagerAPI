@@ -19,11 +19,15 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Application.Enums;
+namespace Infrastructure.Data;
 
-public enum ERole
+using Microsoft.EntityFrameworkCore;
+
+public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
 {
-    ADMIN,
-    MANAGER,
-    USER
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
 }
