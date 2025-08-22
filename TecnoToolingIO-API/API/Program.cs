@@ -21,6 +21,7 @@
 
 using API.Extensions;
 using API.Extensions.DependencyInjection;
+using API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
@@ -58,6 +59,9 @@ app.UseCors(x => x
     .AllowCredentials());
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 app.MapControllers();
 
 // using (var scope = app.Services.CreateScope())
