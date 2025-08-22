@@ -20,28 +20,35 @@
 */
 
 using API.Extensions;
+using API.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
 
-// builder.Services
-//     .AddAppServices()
+builder.Services
+    .AddMainConfigs();
 
 var app = builder.Build();
 
 string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
+Console.ForegroundColor = app.Environment.IsDevelopment() ? ConsoleColor.DarkGreen : ConsoleColor.DarkRed;
 Console.WriteLine($"Environment: {environment}");
 
 if (app.Environment.IsDevelopment())
 {
-    Console.WriteLine("TecnoToolingIO API - Inventory Management Software");
-    Console.WriteLine("Copyright (C) 2025  Lorena Gobara Falci");
-    Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
-    Console.WriteLine("This is free software, and you are welcome to redistribute it under certain conditions.");
-
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Swagger is enabled at: http://127.0.0.1:2525/swagger");
 }
+
+Console.ForegroundColor = ConsoleColor.DarkBlue;
+Console.WriteLine("TecnoToolingIO API - Inventory Management Software");
+Console.WriteLine("Copyright (C) 2025  Lorena Gobara Falci");
+Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
+Console.WriteLine("This is free software, and you are welcome to redistribute it under certain conditions.");
+Console.ResetColor();
 
 app.UseCors(x => x
     .AllowAnyMethod()
