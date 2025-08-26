@@ -21,7 +21,7 @@
 
 namespace API.Extensions.DependencyInjection;
 
-using Infrastructure;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
