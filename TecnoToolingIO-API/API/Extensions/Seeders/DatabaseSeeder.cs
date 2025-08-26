@@ -19,18 +19,31 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace API.Extensions.Seeders;
 
 using Application.Entities;
+using Application.Enums;
+using Application.Interfaces.Services;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public static class DatabaseSeeder
 {
-    public DbSet<Employee> Employees => Set<Employee>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public static async Task SeedAdminEmployeeAsync(this TecnoToolingIODbContext context, IPasswordHasher hasher)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
+        if (!await context.Employees.AnyAsync())
+        {
+            var admin = new Employee()
+            {
+                Code = 0,
+                Name = "Admin",
+                Email = "admin@tecnotooling.com",
+                Password = hasher.Hash("Admin123!"),
+                Role = ERole.ADMIN
+            };
+
+            context.Employees.Add(admin);
+            await context.SaveChangesAsync();
+        }
     }
 }

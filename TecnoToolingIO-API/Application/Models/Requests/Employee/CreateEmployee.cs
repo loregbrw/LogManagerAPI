@@ -19,18 +19,24 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace Application.Models.Requests.Employee;
 
-using Application.Entities;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Application.Enums;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public class CreateEmployee
 {
-    public DbSet<Employee> Employees => Set<Employee>();
+    public required short Code { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
-    }
+    [StringLength(255)]
+    public required string Name { get; set; }
+
+    [StringLength(255)]
+    public required string Email { get; set; }
+
+    [StringLength(50)]
+    public required string Password { get; set; }
+
+    [EnumDataType(typeof(ERole))]
+    public required ERole Role { get; set; }
 }

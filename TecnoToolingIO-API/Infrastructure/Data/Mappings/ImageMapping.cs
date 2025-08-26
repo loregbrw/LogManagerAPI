@@ -26,40 +26,41 @@ using Infrastructure.Data.Mappings.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class EmployeeMapping : BaseMapping<Employee>
+public class ImageMapping : BaseMapping<Image>
 {
-    public override void Configure(EntityTypeBuilder<Employee> builder)
+    public override void Configure(EntityTypeBuilder<Image> builder)
     {
         base.Configure(builder);
 
-        builder.ToTable("tb_employee");
+        builder.ToTable("tb_image");
 
-        builder.Property(e => e.Code)
-               .HasColumnName("code")
-               .HasColumnType("smallint");
+        builder.Property(i => i.FileGuid)
+            .HasColumnName("file_guid")
+            .HasColumnType("uuid")
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
-        builder.Property(e => e.Name)
-               .HasColumnName("name")
-               .HasMaxLength(255);
+        builder.Property(i => i.ImageContentS)
+            .HasColumnName("image_content_small")
+            .HasColumnType("bytea")
+            .IsRequired();
 
-        builder.Property(e => e.Email)
-               .HasColumnName("email")
-               .HasMaxLength(255);
+        builder.Property(i => i.ImageContentM)
+            .HasColumnName("image_content_medium")
+            .HasColumnType("bytea")
+            .IsRequired();
 
-        builder.Property(e => e.Password)
-               .HasColumnName("password")
-               .HasMaxLength(255);
+        builder.Property(i => i.ImageContentL)
+            .HasColumnName("image_content_large")
+            .HasColumnType("bytea")
+            .IsRequired();
 
-        builder.Property(e => e.Role)
-               .HasColumnName("role")
-               .HasConversion<short>()
-               .HasColumnType("smallint");
+        builder.Property(i => i.Extension)
+            .HasColumnName("extension")
+            .HasMaxLength(10)
+            .IsRequired();
 
-        builder.HasOne(e => e.ProfileImage)
-                .WithMany()
-                .HasForeignKey("profile_image_id")
-                .HasPrincipalKey(i => i.Id)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired(false);
+        builder.HasAlternateKey(a => a.FileGuid);
+
     }
 }

@@ -19,18 +19,34 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace Application.Services;
 
+using System.Linq;
+using System.Threading.Tasks;
 using Application.Entities;
+using Application.Interfaces.Repositories.Primitives;
+using Application.Interfaces.Services;
+using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public class EmployeeService(
+    IBaseRepository<Employee> repository
+) : BaseService<Employee>(repository), IEmployeeService
 {
-    public DbSet<Employee> Employees => Set<Employee>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public async Task CreateEmployee()
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
+
     }
+
+    public async Task GetPaginatedEmployees(int page, int size)
+    {
+        int skip = (page - 1) * size;
+
+        var employees = await _repo.GetAllAsNoTracking()
+            .OrderBy(e => e.Name)
+            .Skip(skip)
+            .Take(size)
+            .ToListAsync();
+    }
+
 }

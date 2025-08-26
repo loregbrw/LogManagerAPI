@@ -19,18 +19,11 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace Infrastructure.Services;
 
-using Application.Entities;
-using Microsoft.EntityFrameworkCore;
+using Application.Interfaces.Services;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public class EmailService : IEmailService
 {
-    public DbSet<Employee> Employees => Set<Employee>();
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
-    }
 }
