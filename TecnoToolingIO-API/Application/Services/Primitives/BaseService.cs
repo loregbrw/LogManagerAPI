@@ -33,7 +33,7 @@ using Application.Interfaces.Services.Primitives;
 /// <typeparam name="T">The entity type, which must inherit from <see cref="BaseEntity"/>.</typeparam>
 public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T> where T : BaseEntity
 {
-    private readonly IBaseRepository<T> _repo = repository;
+    protected readonly IBaseRepository<T> _repo = repository;
 
     /// <inheritdoc/>
     public Task<T?> GetByIdAsync(Guid id)

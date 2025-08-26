@@ -19,18 +19,15 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace Application.Entities;
 
-using Application.Entities;
-using Microsoft.EntityFrameworkCore;
+using Application.Entities.Primitives;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public class Image : BaseEntity
 {
-    public DbSet<Employee> Employees => Set<Employee>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
-    }
+    public required Guid FileGuid { get; init; }
+    public required byte[] ImageContentS { get; init; }
+    public required byte[] ImageContentM { get; init; }
+    public required byte[] ImageContentL { get; init; }
+    public required string Extension { get; init; }
 }

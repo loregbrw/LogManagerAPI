@@ -31,6 +31,7 @@ public class Employee : BaseEntity
     public required string Email { get; set; }
     public required string Password { get; set; }
     public ERole Role { get; set; } = ERole.USER;
+    public Image? ProfileImage { get; set; }
 
     // public Guid? DepartmentId { get; set; }
     // public Department? Department { get; set; }

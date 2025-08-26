@@ -19,18 +19,19 @@
     Contact: loregobara@gmail.com
 */
 
-namespace Infrastructure.Data;
+namespace Infrastructure.Services;
 
-using Application.Entities;
-using Microsoft.EntityFrameworkCore;
+using Application.Interfaces.Services;
+using BCrypt.Net;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+/// <summary>
+/// Implements <see cref="IPasswordHasher"/> using the BCrypt algorithm for password hashing and verification.
+/// </summary>
+public class PasswordHasher : IPasswordHasher
 {
-    public DbSet<Employee> Employees => Set<Employee>();
+    /// <inheritdoc/>
+    public string Hash(string password) => BCrypt.HashPassword(password);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
-        base.OnModelCreating(modelBuilder);
-    }
+    /// <inheritdoc/>
+    public bool Verify(string password, string hashedPassword) => BCrypt.Verify(password, hashedPassword);
 }
