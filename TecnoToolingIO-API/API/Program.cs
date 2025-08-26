@@ -21,12 +21,17 @@
 
 using API.Extensions;
 using API.Extensions.DependencyInjection;
+using API.Extensions.Seeders;
+using API.Middlewares;
+using Application.Interfaces.Services;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
 
 builder.Services
     .AddDatabase(builder.Configuration)
+    .AddAddOns()
     .AddMainConfigs();
 
 var app = builder.Build();
@@ -58,14 +63,17 @@ app.UseCors(x => x
     .AllowCredentials());
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 app.MapControllers();
 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var context = scope.ServiceProvider.GetRequiredService<BoschBookingDbContext>();
-//     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<TecnoToolingIODbContext>();
+    var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
-//     await DatabaseSeeder.SeedAsync(context, hasher);
-// }
+    await context.SeedAdminEmployeeAsync(hasher);
+}
 
 app.Run();
