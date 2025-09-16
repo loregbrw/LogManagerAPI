@@ -1,7 +1,7 @@
+namespace Infrastructure.Services;
+
 using Application.Interfaces.Services.Core;
 using Application.Models.Options;
-
-namespace Infrastructure.Services;
 
 public class EmailTemplateService(FrontendOptions frontendOptions) : IEmailTemplateService
 {
