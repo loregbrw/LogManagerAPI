@@ -1,6 +1,7 @@
 
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify
@@ -30,7 +31,7 @@ using Microsoft.EntityFrameworkCore;
 public static class DatabaseInjection
 {
     /// <summary>
-    /// Registers the <see cref="TecnoToolingIODbContext"/> using the PostgreSQL provider with the connection string
+    /// Registers the <see cref="LogManagerDbContext"/> using the PostgreSQL provider with the connection string
     /// from the configuration.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which the database context will be added.</param>
@@ -40,7 +41,7 @@ public static class DatabaseInjection
     {
         var connectionString = configuration.GetConnectionString("Postgres");
 
-        services.AddDbContext<TecnoToolingIODbContext>(options =>
+        services.AddDbContext<LogManagerDbContext>(options =>
             options.UseNpgsql(connectionString));
 
         return services;

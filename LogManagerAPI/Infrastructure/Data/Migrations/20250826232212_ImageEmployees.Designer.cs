@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(TecnoToolingIODbContext))]
+    [DbContext(typeof(LogManagerDbContext))]
     [Migration("20250826232212_ImageEmployees")]
     partial class ImageEmployees
     {

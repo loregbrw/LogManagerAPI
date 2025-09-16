@@ -1,6 +1,7 @@
 
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify
@@ -24,13 +25,13 @@ namespace Infrastructure.Data;
 using Application.Entities;
 using Microsoft.EntityFrameworkCore;
 
-public sealed class TecnoToolingIODbContext(DbContextOptions<TecnoToolingIODbContext> options) : DbContext(options)
+public sealed class LogManagerDbContext(DbContextOptions<LogManagerDbContext> options) : DbContext(options)
 {
     public DbSet<Employee> Employees => Set<Employee>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TecnoToolingIODbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(LogManagerDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

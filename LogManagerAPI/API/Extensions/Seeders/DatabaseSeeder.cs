@@ -1,6 +1,7 @@
 
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify
@@ -29,7 +30,7 @@ using Microsoft.EntityFrameworkCore;
 
 public static class DatabaseSeeder
 {
-    public static async Task SeedAdminEmployeeAsync(this TecnoToolingIODbContext context, IPasswordHasher hasher)
+    public static async Task SeedAdminEmployeeAsync(this LogManagerDbContext context, IPasswordHasher hasher)
     {
         if (!await context.Employees.AnyAsync())
         {
@@ -37,7 +38,7 @@ public static class DatabaseSeeder
             {
                 Code = 0,
                 Name = "Admin",
-                Email = "admin@tecnotooling.com",
+                Email = "admin@logmanager.com",
                 Password = hasher.Hash("Admin123!"),
                 Role = ERole.ADMIN
             };

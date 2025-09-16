@@ -11,7 +11,7 @@ public class EmailTemplateService(FrontendOptions frontendOptions) : IEmailTempl
 $"""
 Olá,
 
-Você está recebendo este e-mail porque alguém cadastrou o seu endereço de e-mail na plataforma TecnoToolingIO.
+Você está recebendo este e-mail porque alguém cadastrou o seu endereço de e-mail na plataforma LogManager.
 
 Para concluir seu cadastro, utilize o seguinte código de verificação (válido por 30 dias):
 
@@ -25,7 +25,7 @@ Este código expira em 30 dias. Após esse período, será necessário solicitar
 Se você não esperava este e-mail, pode ignorá-lo com segurança.
 
 Atenciosamente,  
-Equipe TecnoToolingIO.
+Equipe LogManager.
 """;
 
 }
