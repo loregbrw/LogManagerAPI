@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    [DbContext(typeof(TecnoToolingIODbContext))]
-    partial class TecnoToolingIODbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(LogManagerDbContext))]
+    partial class LogManagerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

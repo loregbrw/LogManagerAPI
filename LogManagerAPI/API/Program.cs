@@ -1,6 +1,7 @@
 
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify
@@ -59,7 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 Console.ForegroundColor = ConsoleColor.DarkBlue;
-Console.WriteLine("TecnoToolingIO API - Inventory Management Software");
+Console.WriteLine("LogManager API
+ - Inventory Management Software");
 Console.WriteLine("Copyright (C) 2025  Lorena Gobara Falci");
 Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
 Console.WriteLine("This is free software, and you are welcome to redistribute it under certain conditions.");
@@ -79,7 +81,7 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<TecnoToolingIODbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<LogManagerDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
     await context.SeedAdminEmployeeAsync(hasher);

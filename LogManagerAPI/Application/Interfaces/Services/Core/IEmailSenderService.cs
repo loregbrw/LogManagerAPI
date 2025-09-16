@@ -1,5 +1,6 @@
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify

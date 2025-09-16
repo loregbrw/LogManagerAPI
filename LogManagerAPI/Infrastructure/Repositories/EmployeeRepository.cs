@@ -8,7 +8,7 @@ using Infrastructure.Repositories.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 public class EmployeeRepository(
-    TecnoToolingIODbContext context, IDateTimeProvider dateTimeProvider
+    LogManagerDbContext context, IDateTimeProvider dateTimeProvider
 ) : BaseRepository<Employee>(context, dateTimeProvider), IEmployeeRepository
 {
 }

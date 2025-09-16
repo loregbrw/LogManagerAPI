@@ -1,6 +1,7 @@
 
 /*
-    TecnoToolingIO API - Inventory Management Software with incoming and outgoing stock control.
+    LogManager API
+ - Inventory Management Software with incoming and outgoing stock control.
     Copyright (C) 2025 Lorena Gobara Falci
 
     This program is free software: you can redistribute it and/or modify
@@ -30,7 +31,7 @@ using Microsoft.Extensions.Options;
 public class EmailSenderService(IOptions<EmailSenderOptions> options) : IEmailSenderService
 {
     private readonly EmailSenderOptions _options = options.Value;
-    private const string displayName = "Equipe TecnoTooling";
+    private const string displayName = "Equipe LogManager";
 
     public void SendEmail(string recipient, string subject, string body)
     {
