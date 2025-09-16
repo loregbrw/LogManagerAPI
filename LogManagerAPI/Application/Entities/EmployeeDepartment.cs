@@ -1,6 +1,6 @@
-using Application.Entities.Primitives;
-
 namespace Application.Entities;
+
+using Application.Entities.Primitives;
 
 public class EmployeeDepartment : BaseEntity
 {

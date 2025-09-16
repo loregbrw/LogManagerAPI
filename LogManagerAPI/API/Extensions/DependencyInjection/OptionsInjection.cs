@@ -1,6 +1,6 @@
-using Application.Models.Options;
-
 namespace API.Extensions.DependencyInjection;
+
+using Application.Models.Options;
 
 public static class OptionsInjection
 {
