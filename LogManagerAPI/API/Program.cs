@@ -38,10 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 Console.ForegroundColor = ConsoleColor.DarkBlue;
-// Console.WriteLine("TecnoToolingIO API - Inventory Management Software");
-// Console.WriteLine("Copyright (C) 2025  Lorena Gobara Falci");
-// Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
-// Console.WriteLine("This is free software, and you are welcome to redistribute it under certain conditions.");
+Console.WriteLine("LogManager API - Logistics Management Software");
+Console.WriteLine("Copyright (c) 2025 Lorena Gobara Falci");
 Console.ResetColor();
 
 app.UseCors(x => x
