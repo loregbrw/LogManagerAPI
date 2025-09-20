@@ -22,62 +22,6 @@ namespace Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Application.Entities.Employee", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<short>("Code")
-                        .HasColumnType("smallint")
-                        .HasColumnName("code");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("password");
-
-                    b.Property<short>("Role")
-                        .HasColumnType("smallint")
-                        .HasColumnName("role");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid?>("profile_image_id")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id")
-                        .HasName("PK_Employee");
-
-                    b.HasIndex("profile_image_id");
-
-                    b.ToTable("tb_employee", (string)null);
-                });
-
             modelBuilder.Entity("Application.Entities.Image", b =>
                 {
                     b.Property<Guid>("Id")
@@ -131,12 +75,68 @@ namespace Infrastructure.Migrations
                     b.ToTable("tb_image", (string)null);
                 });
 
-            modelBuilder.Entity("Application.Entities.Employee", b =>
+            modelBuilder.Entity("Application.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<short>("Code")
+                        .HasColumnType("smallint")
+                        .HasColumnName("code");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("password");
+
+                    b.Property<short>("Role")
+                        .HasColumnType("smallint")
+                        .HasColumnName("role");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid?>("profile_image_id")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id")
+                        .HasName("PK_User");
+
+                    b.HasIndex("profile_image_id");
+
+                    b.ToTable("tb_user", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.User", b =>
                 {
                     b.HasOne("Application.Entities.Image", "ProfileImage")
                         .WithMany()
                         .HasForeignKey("profile_image_id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("ProfileImage");
                 });

@@ -59,7 +59,7 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<LogManagerDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
-    await context.SeedAdminEmployeeAsync(hasher);
+    await context.SeedAdminUserAsync(hasher);
 }
 
 app.Run();

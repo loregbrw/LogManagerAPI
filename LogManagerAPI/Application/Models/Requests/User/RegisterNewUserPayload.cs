@@ -1,9 +1,9 @@
-namespace Application.Models.Requests.Employee;
+namespace Application.Models.Requests.User;
 
 using System.ComponentModel.DataAnnotations;
 using Application.Enums;
 
-public class RegisterNewEmployeePayload
+public class RegisterNewUserPayload
 {
     [StringLength(255)]
     [RegularExpression(@"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$", ErrorMessage = "O nome deve conter apenas letras.")]

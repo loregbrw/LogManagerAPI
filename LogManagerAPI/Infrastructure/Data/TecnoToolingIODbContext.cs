@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 public sealed class LogManagerDbContext(DbContextOptions<LogManagerDbContext> options) : DbContext(options)
 {
-    public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -5,13 +5,13 @@ using Infrastructure.Data.Mappings.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class EmployeeMapping : BaseMapping<Employee>
+public class UserMapping : BaseMapping<User>
 {
-    public override void Configure(EntityTypeBuilder<Employee> builder)
+    public override void Configure(EntityTypeBuilder<User> builder)
     {
         base.Configure(builder);
 
-        builder.ToTable("tb_employee");
+        builder.ToTable("tb_user");
 
         builder.Property(e => e.Code)
                .HasColumnName("code")
@@ -41,11 +41,11 @@ public class EmployeeMapping : BaseMapping<Employee>
                 .OnDelete(DeleteBehavior.SetNull)
                 .IsRequired(false);
 
-        builder.HasOne(e => e.EmployeeDepartment)
-                .WithMany()
-                .HasForeignKey("employee_department_id")
-                .HasPrincipalKey(e => e.Id)
-                .OnDelete(DeleteBehavior.SetNull)
-                .IsRequired(false);
+        // builder.HasOne(e => e.UserDepartment)
+        //         .WithMany()
+        //         .HasForeignKey("User_department_id")
+        //         .HasPrincipalKey(e => e.Id)
+        //         .OnDelete(DeleteBehavior.SetNull)
+        //         .IsRequired(false);
     }
 }

@@ -1,9 +1,9 @@
-namespace Application.Models.Requests.Employee;
+namespace Application.Models.Requests.User;
 
 using System.ComponentModel.DataAnnotations;
 using Application.Enums;
 
-public class CreateEmployee
+public class CreateUser
 {
     public required short Code { get; set; }
 

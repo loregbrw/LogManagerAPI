@@ -7,8 +7,8 @@ using Infrastructure.Data;
 using Infrastructure.Repositories.Primitives;
 using Microsoft.EntityFrameworkCore;
 
-public class EmployeeRepository(
+public class UserRepository(
     LogManagerDbContext context, IDateTimeProvider dateTimeProvider
-) : BaseRepository<Employee>(context, dateTimeProvider), IEmployeeRepository
+) : BaseRepository<User>(context, dateTimeProvider), IUserRepository
 {
 }
