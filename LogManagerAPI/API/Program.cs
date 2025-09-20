@@ -28,19 +28,16 @@ string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ??
 Console.ForegroundColor = app.Environment.IsDevelopment() ? ConsoleColor.DarkGreen : ConsoleColor.DarkRed;
 Console.WriteLine($"Environment: {environment}");
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.WriteLine("Swagger is enabled at: http://127.0.0.1:2525/swagger");
-}
-
 Console.ForegroundColor = ConsoleColor.DarkBlue;
 Console.WriteLine("LogManager API - Logistics Management Software");
 Console.WriteLine("Copyright (c) 2025 Lorena Gobara Falci");
 Console.ResetColor();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseCors(x => x
     .AllowAnyMethod()
