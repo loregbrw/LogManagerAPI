@@ -4,7 +4,7 @@ using API.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/User")]
+[Route("api/users")]
 public class UserController : ControllerBase
 {
     // [ManagerAuthentication]
@@ -15,4 +15,7 @@ public class UserController : ControllerBase
     // {
 
     // }
+
+    // [Http]
+    // public asy
 }
