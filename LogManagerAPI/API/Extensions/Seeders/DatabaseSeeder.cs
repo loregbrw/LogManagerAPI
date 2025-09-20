@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 public static class DatabaseSeeder
 {
-    public static async Task SeedAdminEmployeeAsync(this LogManagerDbContext context, IPasswordHasher hasher)
+    public static async Task SeedAdminUserAsync(this LogManagerDbContext context, IPasswordHasher hasher)
     {
-        if (!await context.Employees.AnyAsync())
+        if (!await context.Users.AnyAsync())
         {
-            var admin = new Employee()
+            var admin = new User()
             {
                 Code = 0,
                 Name = "Admin",
@@ -21,7 +21,7 @@ public static class DatabaseSeeder
                 Role = ERole.ADMIN
             };
 
-            context.Employees.Add(admin);
+            context.Users.Add(admin);
             await context.SaveChangesAsync();
         }
     }

@@ -1,15 +1,15 @@
-namespace API.Features.Employee;
+namespace API.Features.User;
 
 using API.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/employee")]
-public class EmployeeController : ControllerBase
+[Route("api/User")]
+public class UserController : ControllerBase
 {
     // [ManagerAuthentication]
     // [HttpGet]
-    // public async Task<IActionResult> GetPaginatedEmployees(
+    // public async Task<IActionResult> GetPaginatedUsers(
     //     [FromQuery] int? page, [FromQuery] int? count
     // )
     // {

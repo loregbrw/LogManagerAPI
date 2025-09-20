@@ -8,20 +8,20 @@ using Application.Interfaces.Services.Domain;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
-public class EmployeeService(
-    IBaseRepository<Employee> repository
-) : BaseService<Employee>(repository), IEmployeeService
+public class UserService(
+    IBaseRepository<User> repository
+) : BaseService<User>(repository), IUserService
 {
-    public async Task RegisterNewEmployee()
+    public async Task RegisterNewUser()
     {
 
     }
 
-    public async Task GetPaginatedEmployees(int page, int size)
+    public async Task GetPaginatedUsers(int page, int size)
     {
         int skip = (page - 1) * size;
 
-        var employees = await _repo.GetAllAsNoTracking()
+        var Users = await _repo.GetAllAsNoTracking()
             .OrderBy(e => e.Name)
             .Skip(skip)
             .Take(size)
