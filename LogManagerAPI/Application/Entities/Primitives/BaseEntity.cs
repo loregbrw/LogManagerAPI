@@ -6,13 +6,28 @@ namespace Application.Entities.Primitives;
 /// </summary>
 public abstract class BaseEntity
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    /// <summary>
+    /// Gets the unique identifier for the entity.
+    /// </summary>
+    public Guid Id { get; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Gets or sets the date and time when the entity was created.
+    /// </summary>
     public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// Gets or sets the date and time when the entity was last updated.
+    /// </summary>
     public DateTime? UpdatedAt { get; set; }
+
+    /// <summary>
+    /// Gets or sets the date and time when the entity was soft-deleted.
+    /// </summary>
     public DateTime? DeletedAt { get; set; }
 
     /// <summary>
-    /// Whether entity is deleted.
+    /// Indicates whether the entity is soft-deleted.
     /// </summary>
     public bool IsDeleted => DeletedAt is not null;
 }

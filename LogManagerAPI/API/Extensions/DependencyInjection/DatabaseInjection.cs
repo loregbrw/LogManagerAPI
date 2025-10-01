@@ -9,13 +9,23 @@ using Microsoft.EntityFrameworkCore;
 public static class DatabaseInjection
 {
     /// <summary>
-    /// Registers the <see cref="LogManagerDbContext"/> using the PostgreSQL provider with the connection string
-    /// from the configuration.
+    /// Registers the application's <see cref="LogManagerDbContext"/> with the dependency injection container,
+    /// using a PostgreSQL connection string from the configuration.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which the database context will be added.</param>
-    /// <param name="configuration">The ConfigurationManager used to retrieve the connection string.</param>
-    /// <returns>The updated <see cref="IServiceCollection"/> with the database context registered.</returns>
-    public static IServiceCollection AddDatabase(this IServiceCollection services, ConfigurationManager configuration)
+    /// <param name="services">
+    /// The <see cref="IServiceCollection"/> to which the database context will be added.
+    /// </param>
+    /// <param name="configuration">
+    /// The application configuration that contains the connection string named "Postgres".
+    /// </param>
+    /// <returns>
+    /// The same <see cref="IServiceCollection"/> instance, enabling fluent chaining.
+    /// </returns>
+    /// <remarks>
+    /// The database context is configured to use Npgsql (PostgreSQL). 
+    /// Make sure the "Postgres" connection string exists in your configuration files.
+    /// </remarks>
+    public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Postgres");
 
