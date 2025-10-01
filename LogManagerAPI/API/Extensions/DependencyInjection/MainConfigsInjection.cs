@@ -6,11 +6,25 @@ namespace API.Extensions.DependencyInjection;
 public static class MainConfigsInjection
 {
     /// <summary>
-    /// Adds core services and configurations to the application's dependency injection container,
-    /// including CORS, controllers, authorization, problem details, API explorer, and Swagger.
+    /// Adds the core application services and configurations to the dependency injection container.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which the services will be added.</param>
-    /// <returns>The updated <see cref="IServiceCollection"/> with the main configurations registered.</returns>
+    /// <param name="services">
+    /// The <see cref="IServiceCollection"/> to which the main configurations and services will be added.
+    /// </param>
+    /// <returns>
+    /// The same <see cref="IServiceCollection"/> instance, enabling fluent chaining.
+    /// </returns>
+    /// <remarks>
+    /// This method registers the following services:
+    /// <list type="bullet">
+    ///   <item><description>CORS support via AddCors extension method.</description></item>
+    ///   <item><description>Controllers using AddControllers extension method.</description></item>
+    ///   <item><description>Authorization services using AddAuthorization extension method.</description></item>
+    ///   <item><description>Problem details middleware via AddProblemDetails extension method.</description></item>
+    ///   <item><description>API endpoints explorer via AddEndpointsApiExplorer extension method.</description></item>
+    ///   <item><description>Swagger generation via AddSwaggerGen extension method.</description></item>
+    /// </list>
+    /// </remarks>
     public static IServiceCollection AddMainConfigs(this IServiceCollection services)
     {
         services.AddCors();

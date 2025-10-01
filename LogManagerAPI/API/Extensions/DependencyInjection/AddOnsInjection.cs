@@ -11,11 +11,21 @@ using Infrastructure.Services;
 public static class AddOnsInjection
 {
     /// <summary>
-    /// Registers additional services (such as user context, password hasher, and date/time provider)
-    /// into the dependency injection container.
+    /// Registers additional application services in the dependency injection container.
     /// </summary>
-    /// <param name="services">The IServiceCollection to which the services will be added.</param>
-    /// <returns>The updated IServiceCollection with the added services.</returns>
+    /// <param name="services">
+    /// The <see cref="IServiceCollection"/> to which the services will be added.
+    /// </param>
+    /// <returns>
+    /// The same <see cref="IServiceCollection"/> instance, enabling fluent chaining.
+    /// </returns>
+    /// <remarks>
+    /// The following services are registered:
+    /// <list type="bullet">
+    ///   <item><description><see cref="IPasswordHasher"/> → Scoped lifetime, implemented by <see cref="PasswordHasher"/>.</description></item>
+    ///   <item><description><see cref="IDateTimeProvider"/> → Singleton lifetime, implemented by <see cref="SystemDateTimeProvider"/>.</description></item>
+    /// </list>
+    /// </remarks>
     public static IServiceCollection AddAddOns(this IServiceCollection services)
     {
         services.AddScoped<IPasswordHasher, PasswordHasher>();
