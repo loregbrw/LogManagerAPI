@@ -2,36 +2,53 @@ namespace Application.Services.Primitives;
 
 using Application.Entities.Primitives;
 using Application.Exceptions;
+using Application.Extensions;
 using Application.Interfaces.Repositories.Primitives;
 using Application.Interfaces.Services.Primitives;
+using Application.Mappers.Primitives;
+using Application.Models.Entities.Primitives;
+using Application.Models.Pagination;
+using Microsoft.EntityFrameworkCore;
 
-/// <summary>
-/// Implements <see cref="IBaseService{T}"/> to provide default service-layer behavior
-/// for basic CRUD operations, including soft delete, using the repository pattern.
-/// </summary>
-/// <typeparam name="T">The entity type, which must inherit from <see cref="BaseEntity"/>.</typeparam>
-public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T> where T : BaseEntity
+public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T, TDto> mapper) : IBaseService<T, TDto> where T : BaseEntity where TDto : BaseDto
 {
     protected readonly IBaseRepository<T> _repo = repository;
+    protected readonly IEntityMapper<T, TDto> _mapper = mapper;
 
     /// <inheritdoc/>
-    public Task<T?> GetByIdAsync(Guid id)
-        => _repo.GetByIdAsNoTrackingAsync(id);
-
-    /// <inheritdoc/>
-    public async Task<T> CreateAsync(T entity)
+    public async Task<TDto?> GetByIdAsync(Guid id)
     {
-        await _repo.AddAsync(entity);
-        await _repo.SaveChangesAsync();
-        return entity;
+        var entity = await _repo.GetByIdAsNoTrackingAsync(id);
+        return entity is null ? null : _mapper.ToDto(entity);
     }
 
     /// <inheritdoc/>
-    public async Task<T> UpdateAsync(T entity)
+    public async Task<IEnumerable<TDto>> GetAllAsync()
+    {
+        var query = await _repo.GetAllAsNoTracking().ToListAsync();
+        return query.Select(_mapper.ToDto);
+    }
+
+    /// <inheritdoc/>
+    public async Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size)
+    {
+        return await _repo.GetAllAsNoTracking().ToPaginatedResultAsync(_mapper, page, size);
+    }
+
+    /// <inheritdoc/>
+    public async Task<TDto> CreateAsync(T entity)
+    {
+        await _repo.AddAsync(entity);
+        await _repo.SaveChangesAsync();
+        return _mapper.ToDto(entity);
+    }
+
+    /// <inheritdoc/>
+    public async Task<TDto> UpdateAsync(T entity)
     {
         _repo.Update(entity);
         await _repo.SaveChangesAsync();
-        return entity;
+        return _mapper.ToDto(entity);
     }
 
     /// <inheritdoc/>

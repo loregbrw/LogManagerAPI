@@ -16,7 +16,7 @@ using Infrastructure.Data;
 /// This repository uses <see cref="LogManagerDbContext"/> and <see cref="IDateTimeProvider"/> 
 /// to manage data persistence and auditing.
 /// </remarks>
-public abstract class BaseRepository<T>(LogManagerDbContext context, IDateTimeProvider dateTimeProvider) : IBaseRepository<T> where T : BaseEntity
+public class BaseRepository<T>(LogManagerDbContext context, IDateTimeProvider dateTimeProvider) : IBaseRepository<T> where T : BaseEntity
 {
     protected readonly LogManagerDbContext _context = context;
     protected readonly DbSet<T> _dbSet = context.Set<T>();
