@@ -6,27 +6,30 @@ using Application.Entities;
 using Application.Extensions;
 using Application.Interfaces.Repositories.Primitives;
 using Application.Interfaces.Services.Domain;
+using Application.Mappers.Primitives;
+using Application.Models.Entities;
 using Application.Models.Pagination;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 public class UserService(
-    IBaseRepository<User> repository
-) : BaseService<User>(repository), IUserService
+    IBaseRepository<User> repository,
+    IEntityMapper<User, UserDto> mapper
+) : BaseService<User, UserDto>(repository, mapper), IUserService
 {
-    public async Task RegisterNewUser()
-    {
+    // public async Task RegisterNewUser()
+    // {
 
-    }
+    // }
 
-    public async Task<PaginatedResult<User>> GetPaginatedUsers(int page, int size, string? search = null)
+    public async Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null)
     {
         var query = _repo.GetAllAsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(search))
             query = query.Where(u => EF.Functions.Like(u.Name, $"%{search}%"));
 
-        return query.OrderBy(u => u.Name).ToPaginatedResult(page, size);
+        return await query.OrderBy(u => u.Name).ToPaginatedResultAsync(_mapper, page, size);
     }
 
 }

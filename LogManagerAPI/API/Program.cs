@@ -13,6 +13,9 @@ builder.Services
     .AddDatabase(builder.Configuration)
     .AddAddOns()
     .AddLocalizationSupport()
+    .AddRepositories()
+    .AddMappers()
+    .AddServices()
     .AddMainConfigs();
 
 builder.AddOptionsInjection();
