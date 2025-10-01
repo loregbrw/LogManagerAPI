@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/users")]
 public class UserController : ControllerBase
 {
-    // [ManagerAuthentication]
-    // [HttpGet]
-    // public async Task<IActionResult> GetPaginatedUsers(
-    //     [FromQuery] int? page, [FromQuery] int? count
-    // )
-    // {
+    [ManagerAuthentication]
+    [HttpGet]
+    public async Task<IActionResult> GetPaginatedUsers(
+        [FromQuery] string? query, [FromQuery] int? page, [FromQuery] int? count
+    )
+    {
 
-    // }
+    }
 
     // [Http]
     // public asy
