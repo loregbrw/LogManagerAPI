@@ -22,6 +22,10 @@ public static class OptionsInjection
     /// </remarks>
     public static void AddOptionsInjection(this WebApplicationBuilder builder)
     {
+        builder.Services.Configure<AdminUserOptions>(
+            builder.Configuration.GetSection("AdminUser")
+        );
+
         builder.Services.Configure<EmailSenderOptions>(
             builder.Configuration.GetSection("EmailSender")
         );

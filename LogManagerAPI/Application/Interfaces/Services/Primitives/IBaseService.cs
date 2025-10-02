@@ -1,5 +1,6 @@
 namespace Application.Interfaces.Services.Primitives;
 
+using System.Linq.Expressions;
 using Application.Entities.Primitives;
 using Application.Models.Entities.Primitives;
 using Application.Models.Pagination;
@@ -19,7 +20,7 @@ public interface IBaseService<T, TDto> where T : BaseEntity where TDto : BaseDto
 
     Task<IEnumerable<TDto>> GetAllAsync();
 
-    Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size);
+    Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size, Expression<Func<T, bool>>? filter = null);
 
     /// <summary>
     /// Creates and persists a new entity.

@@ -1,0 +1,10 @@
+namespace Application.Models.Options;
+
+public class AdminUserOptions
+{
+    public required short Code { get; set; }
+    public required string Name { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
+    public required string Role { get; set; }
+}
