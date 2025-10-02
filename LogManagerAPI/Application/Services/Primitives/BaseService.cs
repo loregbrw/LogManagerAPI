@@ -1,5 +1,6 @@
 namespace Application.Services.Primitives;
 
+using System.Linq.Expressions;
 using Application.Entities.Primitives;
 using Application.Exceptions;
 using Application.Extensions;
@@ -30,9 +31,14 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
     }
 
     /// <inheritdoc/>
-    public async Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size)
+    public async Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size, Expression<Func<T, bool>>? filter = null)
     {
-        return await _repo.GetAllAsNoTracking().ToPaginatedResultAsync(_mapper, page, size);
+        var query = _repo.GetAllAsNoTracking();
+
+        if (filter is not null)
+            query = query.Where(filter);
+
+        return await query.ToPaginatedResultAsync(_mapper, page, size);
     }
 
     /// <inheritdoc/>

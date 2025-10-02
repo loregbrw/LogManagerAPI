@@ -2,7 +2,9 @@ using API.Extensions;
 using API.Extensions.DependencyInjection;
 using API.Extensions.Seeders;
 using API.Middlewares;
+using Application.Interfaces.Providers;
 using Application.Interfaces.Services.Core;
+using Application.Models.Options;
 using Infrastructure.Data;
 using Microsoft.Extensions.Options;
 
@@ -58,8 +60,11 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<LogManagerDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+    var dateTimeProvider = scope.ServiceProvider.GetRequiredService<IDateTimeProvider>();
 
-    await context.SeedAdminUserAsync(hasher);
+    var adminOptions = scope.ServiceProvider.GetRequiredService<IOptions<AdminUserOptions>>();
+
+    await context.SeedAdminUserAsync(hasher, dateTimeProvider, adminOptions);
 }
 
 app.Run();
