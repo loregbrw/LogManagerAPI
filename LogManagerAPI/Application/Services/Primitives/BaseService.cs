@@ -5,7 +5,7 @@ using Application.Entities.Primitives;
 using Application.Exceptions;
 using Application.Extensions;
 using Application.Interfaces.Repositories.Primitives;
-using Application.Interfaces.Services.Primitives;
+using Application.Interfaces.Services.Domain.Primitives;
 using Application.Mappers.Primitives;
 using Application.Models.Entities.Primitives;
 using Application.Models.Pagination;
@@ -16,21 +16,18 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
     protected readonly IBaseRepository<T> _repo = repository;
     protected readonly IEntityMapper<T, TDto> _mapper = mapper;
 
-    /// <inheritdoc/>
     public async Task<TDto?> GetByIdAsync(Guid id)
     {
         var entity = await _repo.GetByIdAsNoTrackingAsync(id);
         return entity is null ? null : _mapper.ToDto(entity);
     }
 
-    /// <inheritdoc/>
     public async Task<IEnumerable<TDto>> GetAllAsync()
     {
         var query = await _repo.GetAllAsNoTracking().ToListAsync();
         return query.Select(_mapper.ToDto);
     }
 
-    /// <inheritdoc/>
     public async Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size, Expression<Func<T, bool>>? filter = null)
     {
         var query = _repo.GetAllAsNoTracking();
@@ -41,7 +38,6 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
         return await query.ToPaginatedResultAsync(_mapper, page, size);
     }
 
-    /// <inheritdoc/>
     public async Task<TDto> CreateAsync(T entity)
     {
         await _repo.AddAsync(entity);
@@ -49,7 +45,6 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
         return _mapper.ToDto(entity);
     }
 
-    /// <inheritdoc/>
     public async Task<TDto> UpdateAsync(T entity)
     {
         _repo.Update(entity);
@@ -57,7 +52,6 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
         return _mapper.ToDto(entity);
     }
 
-    /// <inheritdoc/>
     public async Task SoftDeleteAsync(Guid id)
     {
         var entity = await _repo.GetByIdAsync(id)
