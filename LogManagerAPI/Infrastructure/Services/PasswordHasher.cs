@@ -1,6 +1,6 @@
 namespace Infrastructure.Services;
 
-using Application.Interfaces.Services.Core;
+using Application.Interfaces.Services.Core.Auth;
 using BCrypt.Net;
 
 /// <summary>

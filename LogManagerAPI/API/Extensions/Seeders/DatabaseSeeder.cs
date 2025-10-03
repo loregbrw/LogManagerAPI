@@ -3,7 +3,7 @@ namespace API.Extensions.Seeders;
 using Application.Entities;
 using Application.Enums;
 using Application.Interfaces.Providers;
-using Application.Interfaces.Services.Core;
+using Application.Interfaces.Services.Core.Auth;
 using Application.Models.Options;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

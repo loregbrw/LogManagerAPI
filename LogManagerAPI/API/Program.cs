@@ -3,7 +3,7 @@ using API.Extensions.DependencyInjection;
 using API.Extensions.Seeders;
 using API.Middlewares;
 using Application.Interfaces.Providers;
-using Application.Interfaces.Services.Core;
+using Application.Interfaces.Services.Core.Auth;
 using Application.Models.Options;
 using Infrastructure.Data;
 using Microsoft.Extensions.Options;
