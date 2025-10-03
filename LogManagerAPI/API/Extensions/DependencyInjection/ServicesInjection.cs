@@ -2,7 +2,7 @@ namespace API.Extensions.DependencyInjection;
 
 using API.Features.User.Get;
 using Application.Interfaces.Services.Domain;
-using Application.Interfaces.Services.Primitives;
+using Application.Interfaces.Services.Domain.Primitives;
 using Application.Services;
 using Application.Services.Primitives;
 

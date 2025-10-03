@@ -1,7 +1,7 @@
 namespace API.Extensions.DependencyInjection;
 
 using Application.Interfaces.Providers;
-using Application.Interfaces.Services.Core;
+using Application.Interfaces.Services.Core.Auth;
 using Infrastructure.Providers;
 using Infrastructure.Services;
 
