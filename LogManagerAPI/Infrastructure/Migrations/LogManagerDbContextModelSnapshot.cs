@@ -75,6 +75,235 @@ namespace Infrastructure.Migrations
                     b.ToTable("tb_image", (string)null);
                 });
 
+            modelBuilder.Entity("Application.Entities.Register", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("double precision")
+                        .HasColumnName("amount");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date")
+                        .HasColumnName("date");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Observation")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("observation");
+
+                    b.Property<short>("RegisterType")
+                        .HasColumnType("smallint")
+                        .HasColumnName("register_type");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("stock_item_id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("user_id")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Register");
+
+                    b.HasIndex("stock_item_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("tb_register", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.StockDepartment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_StockDepartment");
+
+                    b.ToTable("tb_stock_department", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.StockItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("code");
+
+                    b.Property<decimal?>("Cost")
+                        .HasColumnType("numeric")
+                        .HasColumnName("cost");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("Current")
+                        .HasColumnType("integer")
+                        .HasColumnName("current");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("description");
+
+                    b.Property<int>("Inbound")
+                        .HasColumnType("integer")
+                        .HasColumnName("inbound");
+
+                    b.Property<string>("Localization")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("localization");
+
+                    b.Property<short?>("MinimumStock")
+                        .HasColumnType("smallint")
+                        .HasColumnName("minimum_stock");
+
+                    b.Property<int>("Outbound")
+                        .HasColumnType("integer")
+                        .HasColumnName("outbound");
+
+                    b.Property<short?>("StockGroup")
+                        .HasColumnType("smallint")
+                        .HasColumnName("stock_group");
+
+                    b.Property<short?>("StockSituation")
+                        .HasColumnType("smallint")
+                        .HasColumnName("stock_situation");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid?>("stock_department_id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("stock_subgroup_id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("unit_of_measurement_id")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id")
+                        .HasName("PK_StockItem");
+
+                    b.HasIndex("stock_department_id");
+
+                    b.HasIndex("stock_subgroup_id");
+
+                    b.HasIndex("unit_of_measurement_id");
+
+                    b.ToTable("tb_stock_item", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.StockSubgroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_StockSubgroup");
+
+                    b.ToTable("tb_stock_subgroup", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.UnitOfMeasurement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_UnitOfMeasurement");
+
+                    b.ToTable("tb_unit_of_measurement", (string)null);
+                });
+
             modelBuilder.Entity("Application.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -129,6 +358,48 @@ namespace Infrastructure.Migrations
                     b.HasIndex("profile_image_id");
 
                     b.ToTable("tb_user", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.Register", b =>
+                {
+                    b.HasOne("Application.Entities.StockItem", "StockItem")
+                        .WithMany()
+                        .HasForeignKey("stock_item_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Application.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("StockItem");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Application.Entities.StockItem", b =>
+                {
+                    b.HasOne("Application.Entities.StockDepartment", "StockDepartment")
+                        .WithMany()
+                        .HasForeignKey("stock_department_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Application.Entities.StockSubgroup", "StockSubgroup")
+                        .WithMany()
+                        .HasForeignKey("stock_subgroup_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Application.Entities.UnitOfMeasurement", "UnitOfMeasurement")
+                        .WithMany()
+                        .HasForeignKey("unit_of_measurement_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("StockDepartment");
+
+                    b.Navigation("StockSubgroup");
+
+                    b.Navigation("UnitOfMeasurement");
                 });
 
             modelBuilder.Entity("Application.Entities.User", b =>

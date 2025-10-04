@@ -1,8 +1,5 @@
 namespace API.Extensions.DependencyInjection;
 
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-
 public static class LocalizationSupportInjection
 {
     public static IServiceCollection AddLocalizationSupport(this IServiceCollection services)
@@ -13,9 +10,9 @@ public static class LocalizationSupportInjection
 
         services.Configure<RequestLocalizationOptions>(options =>
         {
-            options.DefaultRequestCulture = new RequestCulture("en-US");
-            options.SupportedCultures = [.. supportedCultures.Select(c => new CultureInfo(c))];
-            options.SupportedUICultures = [.. supportedCultures.Select(c => new CultureInfo(c))];
+            options.SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
         });
 
         return services;

@@ -2,20 +2,26 @@ using API.Extensions;
 using API.Extensions.DependencyInjection;
 using API.Extensions.Seeders;
 using API.Middlewares;
-using Application.Interfaces.Services.Core;
+using Application.Interfaces.Providers;
+using Application.Interfaces.Services.Core.Auth;
+using Application.Models.Options;
 using Infrastructure.Data;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
 
+builder.AddOptionsInjection();
+
 builder.Services
     .AddDatabase(builder.Configuration)
     .AddAddOns()
     .AddLocalizationSupport()
+    .AddRepositories()
+    .AddMappers()
+    .AddServices()
     .AddMainConfigs();
 
-builder.AddOptionsInjection();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 var app = builder.Build();
@@ -55,8 +61,11 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<LogManagerDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+    var dateTimeProvider = scope.ServiceProvider.GetRequiredService<IDateTimeProvider>();
 
-    await context.SeedAdminUserAsync(hasher);
+    var adminOptions = scope.ServiceProvider.GetRequiredService<IOptions<AdminUserOptions>>();
+
+    await context.SeedAdminUserAsync(hasher, dateTimeProvider, adminOptions);
 }
 
 app.Run();

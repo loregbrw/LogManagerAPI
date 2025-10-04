@@ -6,6 +6,10 @@ public static class OptionsInjection
 {
     public static void AddOptionsInjection(this WebApplicationBuilder builder)
     {
+        builder.Services.Configure<AdminUserOptions>(
+            builder.Configuration.GetSection("AdminUser")
+        );
+
         builder.Services.Configure<EmailSenderOptions>(
             builder.Configuration.GetSection("EmailSender")
         );
@@ -14,5 +18,8 @@ public static class OptionsInjection
             builder.Configuration.GetSection("Frontend")
         );
 
+        builder.Services.Configure<JwtOptions>(
+            builder.Configuration.GetSection("Jwt")
+        );
     }
 }
