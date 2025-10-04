@@ -12,6 +12,7 @@ public class UserController : ControllerBase
     [ManagerAuthentication]
     [HttpGet]
     public async Task<IActionResult> GetPaginatedUsers(
+        [FromServices] GetPaginatedUsersHandler handler,
         [FromQuery] string? query, [FromQuery] int? page, [FromQuery] int? count
     )
     {
@@ -21,6 +22,11 @@ public class UserController : ControllerBase
         throw new NotFoundException("EntityNotFound", ["User"]);
     }
 
-    // [Http]
-    // public asy
+    // [HttpGet]
+    // public async Task<IActionResult> GetUsers(
+    //     [FromServices] IUserService service
+    // )
+    // {
+    //     var aa = await service.
+    // }
 }

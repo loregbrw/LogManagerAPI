@@ -3,6 +3,7 @@ namespace Application.Services.Primitives;
 using System.Linq.Expressions;
 using Application.Entities.Primitives;
 using Application.Exceptions;
+using Application.Extensions;
 using Application.Interfaces.Repositories.Primitives;
 using Application.Interfaces.Services.Domain.Primitives;
 using Application.Mappers.Primitives;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T, TDto> mapper) : IBaseService<T, TDto> where T : BaseEntity where TDto : BaseDto
 {
     protected readonly IBaseRepository<T> _repo = repository;
+    protected readonly IEntityMapper<T, TDto> _mapper = mapper;
 
     public async Task<TDto?> GetByIdAsync(Guid id)
     {
@@ -40,14 +42,14 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
     {
         await _repo.AddAsync(entity);
         await _repo.SaveChangesAsync();
-        return entity;
+        return _mapper.ToDto(entity);
     }
 
     public async Task<TDto> UpdateAsync(T entity)
     {
         _repo.Update(entity);
         await _repo.SaveChangesAsync();
-        return entity;
+        return _mapper.ToDto(entity);
     }
 
     public async Task SoftDeleteAsync(Guid id)
