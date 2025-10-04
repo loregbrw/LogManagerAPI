@@ -22,5 +22,8 @@
         </xsd:element>
     </xsd:schema>
 
+<data name="EntityNotFound" xml:space="preserve">
+  <value>{0} não encontrado.</value>
+</data>
 
 </root>

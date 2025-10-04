@@ -1,14 +1,7 @@
 namespace API.Extensions.DependencyInjection;
 
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-
-/// <summary>
-/// Provides extension methods for configuring localization support in the application.
-/// </summary>
 public static class LocalizationSupportInjection
 {
-
     public static IServiceCollection AddLocalizationSupport(this IServiceCollection services)
     {
         services.AddLocalization(options => options.ResourcesPath = "Resources");
