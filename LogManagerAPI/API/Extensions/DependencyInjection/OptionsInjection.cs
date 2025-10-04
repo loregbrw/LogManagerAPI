@@ -17,5 +17,9 @@ public static class OptionsInjection
         builder.Services.Configure<FrontendOptions>(
             builder.Configuration.GetSection("Frontend")
         );
+
+        builder.Services.Configure<JwtOptions>(
+            builder.Configuration.GetSection("Jwt")
+        );
     }
 }

@@ -11,13 +11,14 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(builder.Configuration);
 
+builder.AddOptionsInjection();
+
 builder.Services
     .AddDatabase(builder.Configuration)
     .AddAddOns()
     .AddLocalizationSupport()
     .AddMainConfigs();
 
-builder.AddOptionsInjection();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 var app = builder.Build();
