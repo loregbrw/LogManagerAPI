@@ -13,28 +13,28 @@ public class UserMapping : BaseMapping<User>
 
         builder.ToTable("tb_user");
 
-        builder.Property(e => e.Code)
+        builder.Property(u => u.Code)
                .HasColumnName("code")
                .HasColumnType("smallint");
 
-        builder.Property(e => e.Name)
+        builder.Property(u => u.Name)
                .HasColumnName("name")
                .HasMaxLength(255);
 
-        builder.Property(e => e.Email)
+        builder.Property(u => u.Email)
                .HasColumnName("email")
                .HasMaxLength(255);
 
-        builder.Property(e => e.Password)
+        builder.Property(u => u.Password)
                .HasColumnName("password")
                .HasMaxLength(255);
 
-        builder.Property(e => e.Role)
+        builder.Property(u => u.Role)
                .HasColumnName("role")
                .HasConversion<short>()
                .HasColumnType("smallint");
 
-        builder.HasOne(e => e.ProfileImage)
+        builder.HasOne(u => u.ProfileImage)
                 .WithMany()
                 .HasForeignKey("profile_image_id")
                 .HasPrincipalKey(i => i.Id)

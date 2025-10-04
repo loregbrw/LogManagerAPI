@@ -1,5 +1,6 @@
 namespace Application.Interfaces.Services.Primitives;
 
+using System.Linq.Expressions;
 using Application.Entities.Primitives;
 
 /// <summary>
@@ -13,7 +14,11 @@ public interface IBaseService<T> where T : BaseEntity
     /// </summary>
     /// <param name="id">The entity ID.</param>
     /// <returns>The entity instance, or <c>null</c> if not found.</returns>
-    Task<T?> GetByIdAsync(Guid id);
+    Task<TDto?> GetByIdAsync(Guid id);
+
+    Task<IEnumerable<TDto>> GetAllAsync();
+
+    Task<PaginatedResult<TDto>> GetPaginatedAsync(int page, int size, Expression<Func<T, bool>>? filter = null);
 
     /// <summary>
     /// Creates and persists a new entity.
