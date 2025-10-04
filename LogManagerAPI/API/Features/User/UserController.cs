@@ -2,6 +2,7 @@ namespace API.Features.User;
 
 using API.Attributes;
 using API.Features.User.Get;
+using Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -16,7 +17,9 @@ public class UserController : ControllerBase
     )
     {
         var response = await handler.HandleAsync(query, page, count);
-        return Ok(response);
+        // return Ok(response);
+
+        throw new NotFoundException("EntityNotFound", ["User"]);
     }
 
     // [HttpGet]

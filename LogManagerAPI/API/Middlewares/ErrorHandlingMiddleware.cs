@@ -1,7 +1,8 @@
 namespace API.Middlewares;
 
 using System.Text.Json;
-using API.Resources;
+using System.Windows.Markup;
+using API;
 using Application.Exceptions.Primitives;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -34,7 +35,7 @@ public class ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandling
             {
                 Status = e.Status,
                 Title = e.Title,
-                Detail = localizer[e.ResourceKey],
+                Detail = FormatDetail(e, localizer),
                 Type = e.Type
             },
             _ => new ProblemDetails
@@ -56,5 +57,12 @@ public class ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandling
 
         var jsonResponse = JsonSerializer.Serialize(problemDetails);
         await context.Response.WriteAsync(jsonResponse);
+    }
+
+    private static string FormatDetail(AppException exception, IStringLocalizer<Errors> localizer)
+    {
+        return exception.Args is not null && exception.Args.Length > 0
+                ? string.Format(localizer[exception.ResourceKey], exception.Args)
+                : localizer[exception.ResourceKey];
     }
 }
