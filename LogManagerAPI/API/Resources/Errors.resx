@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:schema id="root"
+                xmlns=""
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-        <xsd:element name="root" msdata:IsDataSet="true">
+        <xsd:element name="root"
+                     msdata:IsDataSet="true">
             <xsd:complexType>
                 <xsd:choice maxOccurs="unbounded">
                     <xsd:element name="data">
                         <xsd:complexType>
                             <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" />
+                                <xsd:element name="value"
+                                             type="xsd:string"
+                                             minOccurs="0" />
+                                <xsd:element name="comment"
+                                             type="xsd:string"
+                                             minOccurs="0" />
                             </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string" />
-                            <xsd:attribute name="xml:space" type="xsd:string" />
+                            <xsd:attribute name="name"
+                                           use="required"
+                                           type="xsd:string" />
+                            <xsd:attribute name="xml:space"
+                                           type="xsd:string" />
                         </xsd:complexType>
                     </xsd:element>
                 </xsd:choice>
@@ -22,13 +31,52 @@
         </xsd:element>
     </xsd:schema>
 
-    <data name="UnknownError" xml:space="preserve">
+    <!-- SERVER ERROR -->
+
+    <data name="UnknownError"
+          xml:space="preserve">
         <value>Unknown internal server error.</value>
     </data>
 
-    <data name="EntityNotFound" xml:space="preserve">
+    <!-- NOT FOUND -->
+
+    <data name="EntityNotFound"
+          xml:space="preserve">
         <value>{0} not found.</value>
     </data>
 
+    <!-- AUTH -->
 
+    <data name="WrongPassword"
+          xml:space="preserve">
+        <value>Incorrect password.</value>
+    </data>
+
+    <data name="NotAuthenticated"
+          xml:space="preserve">
+        <value>User not authenticated.</value>
+    </data>
+
+    <!-- TOKEN -->
+
+    <data name="MissingClaim"
+          xml:space="preserve">
+        <value>Token missing {0} claim.</value>
+    </data>
+    <data name="InvalidClaim"
+          xml:space="preserve">
+        <value>Invalid claim {0}.</value>
+    </data>
+    <data name="TokenExpired"
+          xml:space="preserve">
+        <value>Token expired.</value>
+    </data>
+    <data name="InvalidToken"
+          xml:space="preserve">
+        <value>Invalid token.</value>
+    </data>
+    <data name="TokenValidationFailed"
+          xml:space="preserve">
+        <value>Token validation failed.</value>
+    </data>
 </root>
