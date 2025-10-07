@@ -52,12 +52,15 @@ public class StockItemMapping : BaseMapping<StockItem>
                .HasColumnName("minimum_stock");
 
         builder.Property(s => s.Inbound)
+               .IsRequired()
                .HasColumnName("inbound");
 
         builder.Property(s => s.Outbound)
+               .IsRequired()
                .HasColumnName("outbound");
 
         builder.Property(s => s.Current)
+               .IsRequired()
                .HasColumnName("current");
 
         builder.Property(s => s.StockSituation)
