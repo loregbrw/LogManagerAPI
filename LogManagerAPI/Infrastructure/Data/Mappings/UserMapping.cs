@@ -30,6 +30,7 @@ public class UserMapping : BaseMapping<User>
                .HasMaxLength(255);
 
         builder.Property(u => u.Role)
+               .IsRequired()
                .HasColumnName("role")
                .HasConversion<short>()
                .HasColumnType("smallint");
