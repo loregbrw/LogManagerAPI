@@ -79,4 +79,12 @@
           xml:space="preserve">
         <value>Token validation failed.</value>
     </data>
+    <data name="MissingAuthorizationHeader"
+          xml:space="preserve">
+        <value>Missing or invalid Authorization header.</value>
+    </data>
+    <data name="ForbiddenEndpoint"
+          xml:space="preserve">
+        <value>You do not have permission to access this endpoint.</value>
+    </data>
 </root>
