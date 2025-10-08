@@ -20,7 +20,8 @@ builder.Services
     .AddRepositories()
     .AddMappers()
     .AddServices()
-    .AddMainConfigs();
+    .AddMainConfigs()
+    .AddMiddlewares();
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -54,6 +55,7 @@ app.UseCors(x => x
 app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
+app.UseMiddleware<AuthenticationMiddleware>();
 
 app.MapControllers();
 

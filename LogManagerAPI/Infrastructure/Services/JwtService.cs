@@ -41,7 +41,7 @@ public class JwtService : IJwtService
         var token = new JwtSecurityToken(
             issuer: _settings.Issuer,
             claims: claims,
-            expires: DateTime.UtcNow.AddMonths(3),
+            expires: DateTime.UtcNow.AddMinutes(_settings.ExpirationInMinutes),
             signingCredentials: _credentials
         );
 
@@ -78,13 +78,17 @@ public class JwtService : IJwtService
 
             _userContext.Fill(new ContextData(parsedUserId, parsedUserRole));
         }
+        catch (SecurityTokenArgumentException)
+        {
+            throw new UnauthorizedException("InvalidToken");
+        }
         catch (SecurityTokenExpiredException)
         {
             throw new UnauthorizedException("TokenExpired");
         }
         catch (SecurityTokenException)
         {
-            throw new UnauthorizedException("InvalidToken.");
+            throw new UnauthorizedException("InvalidToken");
         }
         catch (Exception ex) when (ex is not AppException)
         {

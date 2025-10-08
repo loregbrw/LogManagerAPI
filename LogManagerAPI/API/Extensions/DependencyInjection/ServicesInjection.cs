@@ -17,6 +17,7 @@ public static class ServicesInjection
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthService, AuthService>();
 
+        services.AddScoped<GetLoggedUserHandler>();
         services.AddScoped<GetPaginatedUsersHandler>();
         services.AddScoped<IUserService, UserService>();
 
