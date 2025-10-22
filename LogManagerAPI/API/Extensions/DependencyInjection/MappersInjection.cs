@@ -11,6 +11,8 @@ public static class MappersInjection
     {
         services.AddScoped<IEntityMapper<User, UserDto>, UserMapper>();
 
+        services.AddScoped<IEntityMapper<StockItem, StockItemDto>, StockItemMapper>();
+
         return services;
     }
 }
