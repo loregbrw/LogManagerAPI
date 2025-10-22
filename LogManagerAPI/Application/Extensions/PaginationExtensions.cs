@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 public static class PaginationExtensions
 {
-    public static PaginatedResult<T> ToPaginatedResult<T>(this IEnumerable<T> result, int page, int size)
+
+    public static PaginatedResult<TDto> ToPaginatedResult<TDto>(this IEnumerable<TDto> result, int page, int size)
     {
         if (page < 1) page = 1;
         if (size < 1) size = 10;
@@ -18,7 +19,7 @@ public static class PaginationExtensions
             .Skip((page - 1) * size)
             .Take(size);
 
-        return new PaginatedResult<T>
+        return new PaginatedResult<TDto>
         (
             items,
             new PaginationData
@@ -27,8 +28,8 @@ public static class PaginationExtensions
                 size,
                 totalPages,
                 totalItems,
-                page < totalPages,
-                page > 1
+                page > 1,
+                page < totalPages
             )
         );
     }
@@ -55,8 +56,8 @@ public static class PaginationExtensions
                 size,
                 totalPages,
                 totalItems,
-                page < totalPages,
-                page > 1
+                page > 1,
+                page < totalPages
             )
         );
     }

@@ -14,8 +14,8 @@ public class StockItem : BaseEntity
     public StockSubgroup? StockSubgroup { get; set; }
     public decimal? Cost { get; set; }
     public short? MinimumStock { get; set; }
-    public int Inbound { get; set; } = 0;
-    public int Outbound { get; set; } = 0;
-    public int Current { get; set; } = 0;
+    public long Inbound { get; set; } = 0;
+    public long Outbound { get; set; } = 0;
+    public long Current { get; set; } = 0;
     public EStockSituation? StockSituation { get; set; }
 }

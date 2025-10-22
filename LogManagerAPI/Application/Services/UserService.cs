@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Entities;
 using Application.Extensions;
-using Application.Interfaces.Repositories.Primitives;
+using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Domain;
 using Application.Mappers.Primitives;
 using Application.Models.Entities;
@@ -13,7 +13,7 @@ using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 public class UserService(
-    IBaseRepository<User> repository,
+    IUserRepository repository,
     IEntityMapper<User, UserDto> mapper
 ) : BaseService<User, UserDto>(repository, mapper), IUserService
 {

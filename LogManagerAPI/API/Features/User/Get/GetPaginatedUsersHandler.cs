@@ -16,9 +16,7 @@ public class GetPaginatedUsersHandler(IUserService service)
         Expression<Func<User, bool>>? filter = null;
 
         if (!string.IsNullOrWhiteSpace(query))
-        {
             filter = u => EF.Functions.Like(u.Name, $"%{query}%");
-        }
 
         var result = await _service.GetPaginatedAsync(page ?? 1, count ?? 10, filter);
 

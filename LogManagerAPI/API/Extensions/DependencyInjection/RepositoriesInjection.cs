@@ -13,6 +13,8 @@ public static class Repositories
 
         services.AddScoped<IUserRepository, UserRepository>();
 
+        services.AddScoped<IStockItemRepository, StockItemRepository>();
+
         return services;
     }
 }

@@ -5,6 +5,6 @@ public record PaginationData(
     int PageSize,
     int TotalPages,
     int TotalItems,
-    bool HasNextPage,
-    bool HasPreviousPage
+    bool HasPreviousPage,
+    bool HasNextPage
 );
