@@ -4,5 +4,6 @@ public enum ERole
 {
     ADMIN,
     MANAGER,
-    USER
+    USER,
+    DATA
 }

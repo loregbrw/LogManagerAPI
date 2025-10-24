@@ -13,9 +13,12 @@ using Microsoft.EntityFrameworkCore;
 
 public class StockItemService(
     IStockItemRepository repository,
-    IEntityMapper<StockItem, StockItemDto> mapper
+    IStockItemMapper mapper
 ) : BaseService<StockItem, StockItemDto>(repository, mapper), IStockItemService
 {
+    private readonly IStockItemRepository _repo = repository;
+    private readonly IStockItemMapper _mapper = mapper;
+
     public async Task<PaginatedStockItemResponse> GetPaginatedStockItemsAsync(
         int page,
         int size,
