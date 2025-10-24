@@ -37,12 +37,23 @@
           xml:space="preserve">
         <value>Unknown internal server error.</value>
     </data>
+    <data name="UnknownErrorMapping"
+          xml:space="preserve">
+        <value>Unknown error mapping entity.</value>
+    </data>
 
     <!-- NOT FOUND -->
 
     <data name="EntityNotFound"
           xml:space="preserve">
         <value>{0} not found.</value>
+    </data>
+
+    <!-- BAD REQUEST -->
+
+    <data name="NullOrWhiteSpace"
+          xml:space="preserve">
+        <value>{0} cannot be null or white space.</value>
     </data>
 
     <!-- AUTH -->
@@ -55,6 +66,45 @@
     <data name="NotAuthenticated"
           xml:space="preserve">
         <value>User not authenticated.</value>
+    </data>
+
+    <!-- CONFLICT -->
+
+    <data name="UserCodeAlreadyExists"
+          xml:space="preserve">
+        <value>A user with the code {0} already exists.</value>
+    </data>
+
+    <data name="UserEmailAlreadyExists"
+          xml:space="preserve">
+        <value>A user with the email {0} already exists.</value>
+    </data>
+
+    <!-- CSV -->
+
+    <data name="EmptyCsv"
+          xml:space="preserve">
+        <value>Csv is empty.</value>
+    </data>
+    <data name="MissingFieldCsv"
+          xml:space="preserve">
+        <value>Missing field at position {0}.</value>
+    </data>
+    <data name="BadDataCsv"
+          xml:space="preserve">
+        <value>Bad data found at row {0}.</value>
+    </data>
+    <data name="InvalidHeaderCsv"
+          xml:space="preserve">
+        <value>Invalid csv header.</value>
+    </data>
+    <data name="ErrorProcessingCsv"
+          xml:space="preserve">
+        <value>Error processing csv: {0}.</value>
+    </data>
+    <data name="MissingCsv"
+          xml:space="preserve">
+        <value>Csv is missing.</value>
     </data>
 
     <!-- TOKEN -->

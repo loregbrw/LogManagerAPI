@@ -5,7 +5,7 @@ using Application.Enums;
 using Application.Mappers.Primitives;
 using Application.Models.Entities;
 
-public class StockItemMapper : IEntityMapper<StockItem, StockItemDto>
+public class StockItemMapper : IStockItemMapper
 {
     public StockItemDto ToDto(StockItem entity)
     {

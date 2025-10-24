@@ -9,9 +9,8 @@ public static class MappersInjection
 {
     public static IServiceCollection AddMappers(this IServiceCollection services)
     {
-        services.AddScoped<IEntityMapper<User, UserDto>, UserMapper>();
-
-        services.AddScoped<IEntityMapper<StockItem, StockItemDto>, StockItemMapper>();
+        services.AddScoped<IStockItemMapper, StockItemMapper>();
+        services.AddScoped<IUserMapper, UserMapper>();
 
         return services;
     }

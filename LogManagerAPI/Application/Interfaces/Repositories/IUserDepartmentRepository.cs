@@ -3,4 +3,4 @@
 using Application.Entities;
 using Application.Interfaces.Repositories.Primitives;
 
-public interface IStockItemRepository : IBaseRepository<StockItem>;
+public interface IUserDepartmentRepository : IBaseRepository<UserDepartment>;
