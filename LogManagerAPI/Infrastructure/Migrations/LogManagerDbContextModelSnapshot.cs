@@ -179,8 +179,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<int>("Current")
-                        .HasColumnType("integer")
+                    b.Property<long>("Current")
+                        .HasColumnType("bigint")
                         .HasColumnName("current");
 
                     b.Property<DateTime?>("DeletedAt")
@@ -192,8 +192,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("description");
 
-                    b.Property<int>("Inbound")
-                        .HasColumnType("integer")
+                    b.Property<long>("Inbound")
+                        .HasColumnType("bigint")
                         .HasColumnName("inbound");
 
                     b.Property<string>("Localization")
@@ -205,8 +205,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("minimum_stock");
 
-                    b.Property<int>("Outbound")
-                        .HasColumnType("integer")
+                    b.Property<long>("Outbound")
+                        .HasColumnType("bigint")
                         .HasColumnName("outbound");
 
                     b.Property<short?>("StockGroup")
@@ -324,7 +324,6 @@ namespace Infrastructure.Migrations
                         .HasColumnName("deleted_at");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("email");
@@ -336,7 +335,6 @@ namespace Infrastructure.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("password");
@@ -352,12 +350,48 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("profile_image_id")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("user_department_id")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id")
                         .HasName("PK_User");
 
                     b.HasIndex("profile_image_id");
 
+                    b.HasIndex("user_department_id");
+
                     b.ToTable("tb_user", (string)null);
+                });
+
+            modelBuilder.Entity("Application.Entities.UserDepartment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("PK_UserDepartment");
+
+                    b.ToTable("tb_user_department", (string)null);
                 });
 
             modelBuilder.Entity("Application.Entities.Register", b =>
@@ -409,7 +443,14 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("profile_image_id")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("Application.Entities.UserDepartment", "UserDepartment")
+                        .WithMany()
+                        .HasForeignKey("user_department_id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("ProfileImage");
+
+                    b.Navigation("UserDepartment");
                 });
 #pragma warning restore 612, 618
         }

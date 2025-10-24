@@ -2,6 +2,7 @@ namespace API.Features.User;
 
 using API.Attributes;
 using API.Features.User.Get;
+using API.Features.User.Post;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -26,6 +27,15 @@ public class UserController : ControllerBase
     {
         var response = await handler.HandleAsync();
         return Ok(response);
+    }
+
+    [HttpPost("import")]
+    public async Task<IActionResult> ImportUsers(
+        [FromServices] ImportUsersHandler handler, [FromForm] IFormFile file
+    )
+    {
+        await handler.HandleAsync(file);
+        return NoContent();
     }
 
     // [HttpGet]

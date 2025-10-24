@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore;
 
 public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T, TDto> mapper) : IBaseService<T, TDto> where T : BaseEntity where TDto : BaseDto
 {
-    protected readonly IBaseRepository<T> _repo = repository;
-    protected readonly IEntityMapper<T, TDto> _mapper = mapper;
+    private readonly IBaseRepository<T> _repo = repository;
+    private readonly IEntityMapper<T, TDto> _mapper = mapper;
 
     public async Task<TDto?> GetByIdAsync(Guid id)
     {
@@ -35,7 +35,7 @@ public class BaseService<T, TDto>(IBaseRepository<T> repository, IEntityMapper<T
         if (filter is not null)
             query = query.Where(filter);
 
-        return await query.ToPaginatedResultAsync(_mapper, page, size);
+        return await query.OrderBy(entity => entity.CreatedAt).ToPaginatedResultAsync(_mapper, page, size);
     }
 
     public async Task<TDto> CreateAsync(T entity)

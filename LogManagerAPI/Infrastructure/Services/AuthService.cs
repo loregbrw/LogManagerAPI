@@ -11,12 +11,12 @@ using Application.Models.Entities;
 using Application.Models.Requests.Auth;
 using Application.Models.Responses.Auth;
 
-public class AuthService(IUserRepository repository, IPasswordHasher hasher, IJwtService jwtService, IEntityMapper<User, UserDto> mapper) : IAuthService
+public class AuthService(IUserRepository repository, IPasswordHasher hasher, IJwtService jwtService, IUserMapper mapper) : IAuthService
 {
     private readonly IUserRepository _repo = repository;
     private readonly IPasswordHasher _hasher = hasher;
     private readonly IJwtService _jwtService = jwtService;
-    private readonly IEntityMapper<User, UserDto> _mapper = mapper;
+    private readonly IUserMapper _mapper = mapper;
 
     public async Task<LoginResponse> LoginAsync(LoginRequest request)
     {

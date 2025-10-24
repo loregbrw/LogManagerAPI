@@ -1,5 +1,6 @@
 namespace Application.Extensions;
 
+using Application.Entities.Primitives;
 using Application.Mappers.Primitives;
 using Application.Models.Pagination;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ public static class PaginationExtensions
         );
     }
 
-    public static async Task<PaginatedResult<TDto>> ToPaginatedResultAsync<T, TDto>(this IQueryable<T> result, IEntityMapper<T, TDto> mapper, int page, int size)
+    public static async Task<PaginatedResult<TDto>> ToPaginatedResultAsync<T, TDto>(this IOrderedQueryable<T> result, IEntityMapper<T, TDto> mapper, int page, int size) where T : BaseEntity
     {
         if (page < 1) page = 1;
         if (size < 1) size = 10;

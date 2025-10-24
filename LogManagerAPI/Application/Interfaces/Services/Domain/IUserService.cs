@@ -8,4 +8,5 @@ using Application.Models.Pagination;
 public interface IUserService : IBaseService<User, UserDto>
 {
     Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null);
+    Task ImportFromCsvAsync(Stream fileStream);
 }
