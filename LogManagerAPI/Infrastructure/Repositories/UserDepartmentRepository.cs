@@ -6,6 +6,6 @@ using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories.Primitives;
 
-public class StockItemRepository(
+public class UserDepartmentRepository(
     LogManagerDbContext context, IDateTimeProvider dateTimeProvider
-) : BaseRepository<StockItem>(context, dateTimeProvider), IStockItemRepository;
+) : BaseRepository<UserDepartment>(context, dateTimeProvider), IUserDepartmentRepository;

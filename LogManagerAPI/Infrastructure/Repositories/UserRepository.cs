@@ -12,5 +12,8 @@ public class UserRepository(
 ) : BaseRepository<User>(context, dateTimeProvider), IUserRepository
 {
     public async Task<User?> GetByEmailAsNoTrackingAsync(string email, CancellationToken cancellationToken = default) =>
-    await _dbSet.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email, cancellationToken);
+        await _dbSet.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email, cancellationToken);
+
+    public async Task<User?> GetByCodeAsNoTrackingAsync(short code, CancellationToken cancellationToken = default) =>
+        await _dbSet.AsNoTracking().SingleOrDefaultAsync(u => u.Code == code, cancellationToken);
 }

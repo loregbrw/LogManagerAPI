@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(LogManagerDbContext))]
-    partial class LogManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251024002718_UpdateUserEntity")]
+    partial class UpdateUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,48 +353,12 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("profile_image_id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("user_department_id")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id")
                         .HasName("PK_User");
 
                     b.HasIndex("profile_image_id");
 
-                    b.HasIndex("user_department_id");
-
                     b.ToTable("tb_user", (string)null);
-                });
-
-            modelBuilder.Entity("Application.Entities.UserDepartment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("name");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.HasKey("Id")
-                        .HasName("PK_UserDepartment");
-
-                    b.ToTable("tb_user_department", (string)null);
                 });
 
             modelBuilder.Entity("Application.Entities.Register", b =>
@@ -443,14 +410,7 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("profile_image_id")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Application.Entities.UserDepartment", "UserDepartment")
-                        .WithMany()
-                        .HasForeignKey("user_department_id")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.Navigation("ProfileImage");
-
-                    b.Navigation("UserDepartment");
                 });
 #pragma warning restore 612, 618
         }

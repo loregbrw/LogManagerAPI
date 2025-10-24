@@ -8,7 +8,8 @@ public record UserDto(
     DateTime CreatedAt,
     short Code,
     string Name,
-    string Email,
+    string? UserDepartment,
+    string? Email,
     ERole Role,
     Guid? ImageGuid
 ) : BaseDto(Id, CreatedAt);

@@ -35,18 +35,18 @@ public class UserMapping : BaseMapping<User>
                .HasConversion<short>()
                .HasColumnType("smallint");
 
+        builder.HasOne(e => e.UserDepartment)
+                .WithMany()
+                .HasForeignKey("user_department_id")
+                .HasPrincipalKey(e => e.Id)
+                .OnDelete(DeleteBehavior.SetNull)
+                .IsRequired(false);
+
         builder.HasOne(u => u.ProfileImage)
                 .WithMany()
                 .HasForeignKey("profile_image_id")
                 .HasPrincipalKey(i => i.Id)
                 .OnDelete(DeleteBehavior.SetNull)
                 .IsRequired(false);
-
-        // builder.HasOne(e => e.UserDepartment)
-        //         .WithMany()
-        //         .HasForeignKey("User_department_id")
-        //         .HasPrincipalKey(e => e.Id)
-        //         .OnDelete(DeleteBehavior.SetNull)
-        //         .IsRequired(false);
     }
 }
