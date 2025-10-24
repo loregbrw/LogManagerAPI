@@ -1,6 +1,7 @@
 namespace API.Extensions.DependencyInjection;
 
 using Application.Interfaces.Providers;
+using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Core.Auth;
 using Infrastructure.Providers;
 using Infrastructure.Services;
@@ -13,6 +14,7 @@ public static class AddOnsInjection
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+        services.AddScoped<ICsvService, CsvService>();
 
         return services;
     }
