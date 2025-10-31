@@ -34,8 +34,8 @@ public class UserController : ControllerBase
         [FromServices] ImportUsersHandler handler, [FromForm] IFormFile file
     )
     {
-        await handler.HandleAsync(file);
-        return NoContent();
+        var response = await handler.HandleAsync(file);
+        return Ok(response);
     }
 
     // [HttpGet]

@@ -4,9 +4,10 @@ using Application.Entities;
 using Application.Interfaces.Services.Domain.Primitives;
 using Application.Models.Entities;
 using Application.Models.Pagination;
+using Application.Models.Responses.Import;
 
 public interface IUserService : IBaseService<User, UserDto>
 {
     Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null);
-    Task ImportFromCsvAsync(Stream fileStream);
+    Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream);
 }

@@ -12,6 +12,7 @@ using Application.Mappers.Primitives;
 using Application.Models.Entities;
 using Application.Models.Pagination;
 using Application.Models.Requests.User;
+using Application.Models.Responses.Import;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,13 +40,15 @@ public class UserService(
             .ToPaginatedResultAsync(_mapper, page, size);
     }
 
-    public async Task ImportFromCsvAsync(Stream fileStream)
+    public async Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream)
     {
         var records = _csvService.ImportFromCsv<NewUser>(fileStream);
         var departments = await _userDepartmentRepo.GetAll().ToDictionaryAsync(d => d.Name, d => d);
 
         var existingCodes = (await _repo.GetAll().Select(u => u.Code).ToListAsync()).ToHashSet();
         var existingEmails = (await _repo.GetAll().Where(u => u.Email != null).Select(u => u.Email).ToListAsync()).ToHashSet();
+
+        int ImportedItems = 0;
 
         foreach (var record in records)
         {
@@ -71,11 +74,16 @@ public class UserService(
             }
 
             await _repo.AddAsync(user);
+            ImportedItems++;
 
             existingCodes.Add(user.Code);
             if (user.Email is not null) existingEmails.Add(user.Email);
         }
 
         await _repo.SaveChangesAsync();
+
+        return new ImportCsvResponse(
+            ImportedItems
+        );
     }
 }

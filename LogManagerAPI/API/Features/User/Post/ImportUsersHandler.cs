@@ -2,16 +2,17 @@
 
 using Application.Exceptions;
 using Application.Interfaces.Services.Domain;
+using Application.Models.Responses.Import;
 
 public class ImportUsersHandler(IUserService service)
 {
     private readonly IUserService _service = service;
 
-    public async Task HandleAsync(IFormFile file)
+    public async Task<ImportCsvResponse> HandleAsync(IFormFile file)
     {
         if (file is null || file.Length == 0)
             throw new BadRequestException("MissingCsv");
 
-        await _service.ImportFromCsvAsync(file.OpenReadStream());
+        return await _service.ImportFromCsvAsync(file.OpenReadStream());
     }
 }
