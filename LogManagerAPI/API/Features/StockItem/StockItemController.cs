@@ -12,7 +12,7 @@ public class StockItemController : ControllerBase
     public async Task<IActionResult> GetPaginatedUsers(
         [FromServices] GetPaginatedStockItemsHandler handler,
         [FromQuery] string? query, [FromQuery] int? page, [FromQuery] int? count,
-        [FromQuery] EStockGroup? group, [FromQuery] EStockItemStatus status
+        [FromQuery] EStockGroup? group, [FromQuery] EStockItemStatus? status
     )
     {
         var response = await handler.HandleAsync(query, page, count, group, status);
