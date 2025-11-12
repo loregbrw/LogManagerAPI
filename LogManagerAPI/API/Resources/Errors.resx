@@ -55,6 +55,18 @@
           xml:space="preserve">
         <value>{0} cannot be null or white space.</value>
     </data>
+    <data name="FieldTooLong"
+          xml:space="preserve">
+        <value>{0} cannot longer than {1} characters.</value>
+    </data>
+    <data name="FieldRequired"
+          xml:space="preserve">
+        <value>{0} is required.</value>
+    </data>
+    <data name="InvalidEnumValue"
+          xml:space="preserve">
+        <value>{1} isn't a valid value for {0} .</value>
+    </data>
 
     <!-- AUTH -->
 
@@ -106,6 +118,19 @@
           xml:space="preserve">
         <value>Csv is missing.</value>
     </data>
+    <data name="MissingHeader"
+          xml:space="preserve">
+        <value>Csv header is missing.</value>
+    </data>
+    <data name="DuplicateHeaders"
+          xml:space="preserve">
+        <value>Duplicate headers for property {0} found in CSV.</value>
+    </data>
+    <data name="InvalidCurrencyFormat"
+          xml:space="preserve">
+        <value>Invalid currency format for {0}.</value>
+    </data>
+
 
     <!-- TOKEN -->
 
