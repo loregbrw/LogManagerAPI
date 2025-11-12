@@ -11,11 +11,12 @@ public static class Repositories
     {
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
-        services.AddScoped<IUserRepository, UserRepository>();
-
+        services.AddScoped<IStockDepartmentRepository, StockDepartmentRepository>();
         services.AddScoped<IStockItemRepository, StockItemRepository>();
-
+        services.AddScoped<IStockSubgroupRepository, StockSubgroupRepository>();
+        services.AddScoped<IUnitOfMeasurementRepository, UnitOfMeasurementRepository>();
         services.AddScoped<IUserDepartmentRepository, UserDepartmentRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
