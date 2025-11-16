@@ -6,7 +6,7 @@ using Application.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/stockItems")]
+[Route("api/stock-items")]
 public class StockItemController : ControllerBase
 {
     [HttpGet("paginated")]
