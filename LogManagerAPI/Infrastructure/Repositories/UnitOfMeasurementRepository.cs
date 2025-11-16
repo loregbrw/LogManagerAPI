@@ -5,6 +5,6 @@ using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories.Primitives;
 
-public class UserDepartmentRepository(
+public class UnitOfMeasurementRepository(
     LogManagerDbContext context
-) : BaseRepository<UserDepartment>(context), IUserDepartmentRepository;
+) : BaseRepository<UnitOfMeasurement>(context), IUnitOfMeasurementRepository;
