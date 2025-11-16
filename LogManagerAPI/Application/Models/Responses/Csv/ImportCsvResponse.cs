@@ -1,4 +1,4 @@
-﻿namespace Application.Models.Responses.Import;
+﻿namespace Application.Models.Responses.Csv;
 
 public record ImportCsvResponse(
     int ImportedItems

@@ -33,4 +33,16 @@ public class AppEnumFlexibleConverter<TEnum> : IAppConverter where TEnum : struc
 
         throw new BadRequestException("InvalidEnumValue", typeof(TEnum).Name, value);
     }
+
+    public string? ConvertToString(object? value)
+    {
+        if (value is null) return null;
+
+        var enumValue = (TEnum)value;
+        var field = typeof(TEnum).GetField(enumValue.ToString());
+
+        if (field is null) return enumValue.ToString();
+
+        return field.GetCustomAttribute<AppAliasAttribute>()?.Alias ?? enumValue.ToString();
+    }
 }

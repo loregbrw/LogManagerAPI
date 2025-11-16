@@ -26,4 +26,21 @@ public class AppCurrencyConverter : IAppConverter
             ? result
             : throw new BadRequestException("InvalidCurrencyFormat", value);
     }
+
+    public string? ConvertToString(object? value)
+    {
+        if (value is null) return null;
+
+        var decimalValue = value switch
+        {
+            decimal d => d,
+            int i => i,
+            long l => l,
+            double db => (decimal)db,
+            float f => (decimal)f,
+            _ => throw new BadRequestException("InvalidCurrencyType", value.GetType().Name)
+        };
+
+        return decimalValue.ToString("C2", new CultureInfo("pt-BR"));
+    }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Application.Attributes;
 using Application.Enums;
 
-public class NewUser
+public class UserCsv
 {
     [AppAlias("CÓD FUNCIONÁRIOS")]
     public short? Code { get; set; }

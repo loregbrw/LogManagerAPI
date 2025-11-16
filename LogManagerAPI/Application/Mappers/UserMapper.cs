@@ -22,7 +22,7 @@ public class UserMapper : IUserMapper
         );
     }
 
-    public User FromNewUser(NewUser entity)
+    public User FromUserCsv(UserCsv entity)
     {
         return new User
         {

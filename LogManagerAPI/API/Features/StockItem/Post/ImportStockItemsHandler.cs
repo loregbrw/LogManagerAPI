@@ -2,7 +2,7 @@
 
 using Application.Exceptions;
 using Application.Interfaces.Services.Domain;
-using Application.Models.Responses.Import;
+using Application.Models.Responses.Csv;
 
 public class ImportStockItemsHandler(IStockItemService service)
 {

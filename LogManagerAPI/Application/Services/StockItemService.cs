@@ -4,20 +4,21 @@ using Application.Entities;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Extensions;
+using Application.Interfaces.Providers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Domain;
 using Application.Mappers.Primitives;
 using Application.Models.Entities;
 using Application.Models.Requests.StockItem;
-using Application.Models.Responses.Import;
+using Application.Models.Responses.Csv;
 using Application.Models.Responses.StockItem;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 public class StockItemService(
     IStockItemRepository repository, IUnitOfMeasurementRepository unitOfMeasurementRepository, IStockDepartmentRepository stockDepartmentRepository, IStockSubgroupRepository stockSubgroupRepository,
-    IStockItemMapper mapper, ICsvService csvService
+    IStockItemMapper mapper, ICsvService csvService, IDateTimeProvider dateTimeProvider
 ) : BaseService<StockItem, StockItemDto>(repository, mapper), IStockItemService
 {
     private readonly IStockItemRepository _repo = repository;
@@ -26,6 +27,7 @@ public class StockItemService(
     private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository = unitOfMeasurementRepository;
     private readonly IStockDepartmentRepository _stockDepartmentRepository = stockDepartmentRepository;
     private readonly IStockSubgroupRepository _stockSubgroupRepository = stockSubgroupRepository;
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
     public async Task<PaginatedStockItemResponse> GetPaginatedStockItemsAsync(
         int page,
@@ -75,7 +77,7 @@ public class StockItemService(
 
     public async Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream)
     {
-        var records = _csvService.ImportFromCsv<NewStockItem>(fileStream);
+        var records = _csvService.ImportFromCsv<StockItemCsv>(fileStream);
         var unitsOfMeasurement = await _unitOfMeasurementRepository.GetAll().ToDictionaryAsync(u => u.Name, d => d);
         var stockDepartments = await _stockDepartmentRepository.GetAll().ToDictionaryAsync(s => s.Name, d => d);
         var stockSubgroups = await _stockSubgroupRepository.GetAll().ToDictionaryAsync(s => s.Name, d => d);
@@ -89,7 +91,7 @@ public class StockItemService(
             if (string.IsNullOrWhiteSpace(record.Code) || existingCodes.Contains(record.Code))
                 continue;
 
-            var stockItem = _mapper.FromNewStockItem(record);
+            var stockItem = _mapper.FromStockItemCsv(record);
 
             if (!string.IsNullOrWhiteSpace(record.UnitOfMeasurement))
             {
@@ -132,5 +134,20 @@ public class StockItemService(
         return new ImportCsvResponse(
             ImportedItems
         );
+    }
+
+    public async Task<ExportCsvResponse> ExportToCsvAsync(char? delimiter)
+    {
+        var stockItems = await _repo.GetAllAsNoTracking()
+            .Include(s => s.UnitOfMeasurement)
+            .Include(s => s.StockDepartment)
+            .Include(s => s.StockSubgroup)
+            .OrderBy(s => s.Code)
+            .ToListAsync();
+
+        var stream = _csvService.ExportToCsv(stockItems.Select(_mapper.ToStockItemCsv), delimiter ?? ';');
+        var fileName = $"stock-items-{_dateTimeProvider.UtcNow:dd-MM-yyyy-HH-mm-ss}.csv";
+
+        return new ExportCsvResponse(stream, fileName, "text/csv");
     }
 }
