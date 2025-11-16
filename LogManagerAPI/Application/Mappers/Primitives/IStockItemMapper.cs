@@ -6,5 +6,6 @@ using Application.Models.Requests.StockItem;
 
 public interface IStockItemMapper : IEntityMapper<StockItem, StockItemDto>
 {
-    StockItem FromNewStockItem(NewStockItem entity);
+    StockItem FromStockItemCsv(StockItemCsv entity);
+    StockItemCsv ToStockItemCsv(StockItem entity);
 }

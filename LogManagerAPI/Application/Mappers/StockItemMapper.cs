@@ -30,7 +30,7 @@ public class StockItemMapper : IStockItemMapper
         );
     }
 
-    public StockItem FromNewStockItem(NewStockItem entity)
+    public StockItem FromStockItemCsv(StockItemCsv entity)
     {
         return new StockItem
         {
@@ -44,6 +44,26 @@ public class StockItemMapper : IStockItemMapper
             Outbound = entity.Outbound,
             Current = entity.Current,
             StockSituation = entity.Situation
+        };
+    }
+
+    public StockItemCsv ToStockItemCsv(StockItem entity)
+    {
+        return new StockItemCsv
+        {
+            Code = entity.Code,
+            Description = entity.Description,
+            UnitOfMeasurement = entity.UnitOfMeasurement?.Name,
+            Localization = entity.Localization,
+            Department = entity.StockDepartment?.Name,
+            Group = entity.StockGroup,
+            Subgroup = entity.StockSubgroup?.Name,
+            Cost = entity.Cost,
+            MinimumStock = entity.MinimumStock,
+            Inbound = entity.Inbound,
+            Outbound = entity.Outbound,
+            Current = entity.Current,
+            Situation = entity.StockSituation
         };
     }
 }

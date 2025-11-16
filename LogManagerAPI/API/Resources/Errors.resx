@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <xsd:schema id="root"
-                xmlns=""
-                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        xmlns=""
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
         <xsd:element name="root"
-                     msdata:IsDataSet="true">
+            msdata:IsDataSet="true">
             <xsd:complexType>
                 <xsd:choice maxOccurs="unbounded">
                     <xsd:element name="data">
                         <xsd:complexType>
                             <xsd:sequence>
                                 <xsd:element name="value"
-                                             type="xsd:string"
-                                             minOccurs="0" />
+                                    type="xsd:string"
+                                    minOccurs="0" />
                                 <xsd:element name="comment"
-                                             type="xsd:string"
-                                             minOccurs="0" />
+                                    type="xsd:string"
+                                    minOccurs="0" />
                             </xsd:sequence>
                             <xsd:attribute name="name"
-                                           use="required"
-                                           type="xsd:string" />
+                                use="required"
+                                type="xsd:string" />
                             <xsd:attribute name="xml:space"
-                                           type="xsd:string" />
+                                type="xsd:string" />
                         </xsd:complexType>
                     </xsd:element>
                 </xsd:choice>
@@ -34,132 +34,144 @@
     <!-- SERVER ERROR -->
 
     <data name="UnknownError"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Unknown internal server error.</value>
     </data>
     <data name="UnknownErrorMapping"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Unknown error mapping entity.</value>
     </data>
 
     <!-- NOT FOUND -->
 
     <data name="EntityNotFound"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>{0} not found.</value>
     </data>
 
     <!-- BAD REQUEST -->
 
     <data name="NullOrWhiteSpace"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>{0} cannot be null or white space.</value>
     </data>
     <data name="FieldTooLong"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>{0} cannot longer than {1} characters.</value>
     </data>
     <data name="FieldRequired"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>{0} is required.</value>
     </data>
     <data name="InvalidEnumValue"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>{1} isn't a valid value for {0} .</value>
     </data>
 
     <!-- AUTH -->
 
     <data name="WrongPassword"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Incorrect password.</value>
     </data>
 
     <data name="NotAuthenticated"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>User not authenticated.</value>
     </data>
 
     <!-- CONFLICT -->
 
     <data name="UserCodeAlreadyExists"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>A user with the code {0} already exists.</value>
     </data>
 
     <data name="UserEmailAlreadyExists"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>A user with the email {0} already exists.</value>
     </data>
 
     <!-- CSV -->
 
     <data name="EmptyCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Csv is empty.</value>
     </data>
     <data name="MissingFieldCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Missing field at position {0}.</value>
     </data>
     <data name="BadDataCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Bad data found at row {0}.</value>
     </data>
     <data name="InvalidHeaderCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Invalid csv header.</value>
     </data>
     <data name="ErrorProcessingCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Error processing csv: {0}.</value>
     </data>
     <data name="MissingCsv"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Csv is missing.</value>
     </data>
     <data name="MissingHeader"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Csv header is missing.</value>
     </data>
     <data name="DuplicateHeaders"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Duplicate headers for property {0} found in CSV.</value>
     </data>
+    <data name="NoMatchingHeaders"
+        xml:space="preserve">
+        <value>No matching headers found in CSV.</value>
+    </data>
     <data name="InvalidCurrencyFormat"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Invalid currency format for {0}.</value>
+    </data>
+    <data name="InvalidCurrencyType"
+        xml:space="preserve">
+        <value>Invalid type {0} for currency conversion. Expected decimal or numeric type.</value>
+    </data>
+    <data name="InvalidDelimiter"
+        xml:space="preserve">
+        <value>Invalid CSV delimiter. Allowed delimiters are: ; | , and tab.</value>
     </data>
 
 
     <!-- TOKEN -->
 
     <data name="MissingClaim"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Token missing {0} claim.</value>
     </data>
     <data name="InvalidClaim"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Invalid claim {0}.</value>
     </data>
     <data name="TokenExpired"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Token expired.</value>
     </data>
     <data name="InvalidToken"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Invalid token.</value>
     </data>
     <data name="TokenValidationFailed"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Token validation failed.</value>
     </data>
     <data name="MissingAuthorizationHeader"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>Missing or invalid Authorization header.</value>
     </data>
     <data name="ForbiddenEndpoint"
-          xml:space="preserve">
+        xml:space="preserve">
         <value>You do not have permission to access this endpoint.</value>
     </data>
 </root>

@@ -6,5 +6,6 @@ using Application.Models.Requests.User;
 
 public interface IUserMapper : IEntityMapper<User, UserDto>
 {
-    User FromNewUser(NewUser entity);
+    User FromUserCsv(UserCsv entity);
+    // UserCsv ToUserCsv(User entity);
 }

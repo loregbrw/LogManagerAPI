@@ -5,7 +5,7 @@ using Application.Attributes;
 using Application.Converters;
 using Application.Enums;
 
-public class NewStockItem
+public class StockItemCsv
 {
     [AppStringLength(50)]
     [AppAlias("CÓDIGO - GRV")]
