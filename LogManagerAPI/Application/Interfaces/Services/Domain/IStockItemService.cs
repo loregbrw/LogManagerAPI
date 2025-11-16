@@ -4,6 +4,7 @@ using Application.Entities;
 using Application.Enums;
 using Application.Interfaces.Services.Domain.Primitives;
 using Application.Models.Entities;
+using Application.Models.Responses.Import;
 using Application.Models.Responses.StockItem;
 
 public interface IStockItemService : IBaseService<StockItem, StockItemDto>
@@ -15,4 +16,6 @@ public interface IStockItemService : IBaseService<StockItem, StockItemDto>
         EStockGroup? stockGroup = null,
         EStockItemStatus? status = null
     );
+
+    Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream);
 }

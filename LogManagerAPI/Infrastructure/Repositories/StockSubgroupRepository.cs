@@ -5,6 +5,6 @@ using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories.Primitives;
 
-public class UserDepartmentRepository(
+public class StockSubgroupRepository(
     LogManagerDbContext context
-) : BaseRepository<UserDepartment>(context), IUserDepartmentRepository;
+) : BaseRepository<StockSubgroup>(context), IStockSubgroupRepository;
