@@ -1,6 +1,7 @@
 ﻿namespace API.Features.StockItem;
 
 using API.Features.StockItem.Get;
+using API.Features.StockItem.Post;
 using Application.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,15 @@ public class StockItemController : ControllerBase
     )
     {
         var response = await handler.HandleAsync(query, page, count, group, status);
+        return Ok(response);
+    }
+
+    [HttpPost("import")]
+    public async Task<IActionResult> ImportUsers(
+        [FromServices] ImportStockItemsHandler handler, [FromForm] IFormFile file
+    )
+    {
+        var response = await handler.HandleAsync(file);
         return Ok(response);
     }
 }

@@ -2,8 +2,10 @@
 
 using Application.Entities;
 using Application.Enums;
+using Application.Exceptions;
 using Application.Mappers.Primitives;
 using Application.Models.Entities;
+using Application.Models.Requests.StockItem;
 
 public class StockItemMapper : IStockItemMapper
 {
@@ -26,5 +28,22 @@ public class StockItemMapper : IStockItemMapper
                 _ => EStockItemStatus.INSTOCK
             }
         );
+    }
+
+    public StockItem FromNewStockItem(NewStockItem entity)
+    {
+        return new StockItem
+        {
+            Code = entity.Code ?? throw new InternalServerErrorException("UnknownErrorMapping"),
+            Description = entity.Description,
+            Localization = entity.Localization,
+            StockGroup = entity.Group,
+            Cost = entity.Cost,
+            MinimumStock = entity.MinimumStock,
+            Inbound = entity.Inbound,
+            Outbound = entity.Outbound,
+            Current = entity.Current,
+            StockSituation = entity.Situation
+        };
     }
 }

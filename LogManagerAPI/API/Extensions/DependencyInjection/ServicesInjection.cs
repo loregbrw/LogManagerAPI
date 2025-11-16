@@ -1,6 +1,7 @@
 namespace API.Extensions.DependencyInjection;
 
 using API.Features.StockItem.Get;
+using API.Features.StockItem.Post;
 using API.Features.User.Get;
 using API.Features.User.Post;
 using Application.Interfaces.Services.Core;
@@ -25,6 +26,7 @@ public static class ServicesInjection
         services.AddScoped<IUserService, UserService>();
 
         services.AddScoped<GetPaginatedStockItemsHandler>();
+        services.AddScoped<ImportStockItemsHandler>();
         services.AddScoped<IStockItemService, StockItemService>();
 
         return services;
