@@ -50,7 +50,8 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
     .SetIsOriginAllowed(origin => true)
-    .AllowCredentials());
+    .AllowCredentials()
+    .WithExposedHeaders("Content-Disposition"));
 
 app.UseAuthorization();
 
