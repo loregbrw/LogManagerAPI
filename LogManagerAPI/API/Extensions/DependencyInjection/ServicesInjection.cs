@@ -29,6 +29,8 @@ public static class ServicesInjection
         services.AddScoped<ImportStockItemsHandler>();
         services.AddScoped<IStockItemService, StockItemService>();
 
+        services.AddScoped<IUserDepartmentService, UserDepartmentService>();
+
         return services;
     }
 }

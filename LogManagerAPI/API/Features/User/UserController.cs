@@ -48,6 +48,15 @@ public class UserController : ControllerBase
         return File(response.Content, response.ContentType, response.FileName);
     }
 
+    [HttpGet("roles/values")]
+    public async Task<IActionResult> GetUserRoles(
+        [FromServices] IUserService service
+    )
+    {
+        var response = service.GetUserRoles();
+        return Ok(response);
+    }
+
     // [HttpGet]
     // public async Task<IActionResult> GetUsers(
     //     [FromServices] IUserService service

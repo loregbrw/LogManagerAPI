@@ -15,6 +15,7 @@ public static class AddOnsInjection
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
         services.AddScoped<ICsvService, CsvService>();
+        services.AddScoped<IEnumHelper, EnumHelper>();
 
         return services;
     }

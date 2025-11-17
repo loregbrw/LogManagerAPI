@@ -3,23 +3,25 @@ namespace Application.Services;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Entities;
+using Application.Enums;
 using Application.Exceptions;
 using Application.Extensions;
+using Application.Interfaces.Mappers;
 using Application.Interfaces.Providers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Domain;
-using Application.Mappers.Primitives;
 using Application.Models.Entities;
 using Application.Models.Pagination;
 using Application.Models.Requests.User;
 using Application.Models.Responses.Csv;
+using Application.Models.Responses.Enum;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 public class UserService(
     IUserRepository repository, IUserDepartmentRepository userDepartmentRepository,
-    IUserMapper mapper, ICsvService csvService, IDateTimeProvider dateTimeProvider
+    IUserMapper mapper, ICsvService csvService, IDateTimeProvider dateTimeProvider, IEnumHelper enumHelper
 ) : BaseService<User, UserDto>(repository, mapper), IUserService
 {
     private readonly IUserRepository _repo = repository;
@@ -27,6 +29,7 @@ public class UserService(
     private readonly ICsvService _csvService = csvService;
     private readonly IUserDepartmentRepository _userDepartmentRepo = userDepartmentRepository;
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+    private readonly IEnumHelper _enumHelper = enumHelper;
 
     public async Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null)
     {
@@ -39,6 +42,12 @@ public class UserService(
             .Include(u => u.UserDepartment)
             .OrderBy(u => u.Name)
             .ToPaginatedResultAsync(_mapper, page, size);
+    }
+
+    public GetValuesResponse GetUserRoles()
+    {
+       var values = _enumHelper.GetEnumValuesResponse<ERole>();
+       return new GetValuesResponse(values);
     }
 
     public async Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream)
