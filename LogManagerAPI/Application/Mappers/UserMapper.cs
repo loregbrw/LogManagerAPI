@@ -2,7 +2,7 @@ namespace Application.Mappers;
 
 using Application.Entities;
 using Application.Exceptions;
-using Application.Mappers.Primitives;
+using Application.Interfaces.Mappers;
 using Application.Models.Entities;
 using Application.Models.Requests.User;
 

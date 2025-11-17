@@ -3,7 +3,7 @@
 using Application.Entities;
 using Application.Enums;
 using Application.Exceptions;
-using Application.Mappers.Primitives;
+using Application.Interfaces.Mappers;
 using Application.Models.Entities;
 using Application.Models.Requests.StockItem;
 

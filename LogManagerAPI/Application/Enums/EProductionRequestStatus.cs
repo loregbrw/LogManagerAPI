@@ -1,4 +1,4 @@
-﻿namespace Application.Models.Options;
+﻿namespace Application.Enums;
 
 public enum EProductionRequestStatus
 {

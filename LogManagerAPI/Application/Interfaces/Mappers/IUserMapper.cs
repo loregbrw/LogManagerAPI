@@ -1,5 +1,7 @@
-﻿namespace Application.Mappers.Primitives;
+﻿namespace Application.Interfaces.Mappers;
 
+
+using Application.Mappers.Primitives;
 using Application.Entities;
 using Application.Models.Entities;
 using Application.Models.Requests.User;
