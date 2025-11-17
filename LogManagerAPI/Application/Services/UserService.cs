@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Entities;
 using Application.Exceptions;
 using Application.Extensions;
+using Application.Interfaces.Providers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Domain;
@@ -18,14 +19,14 @@ using Microsoft.EntityFrameworkCore;
 
 public class UserService(
     IUserRepository repository, IUserDepartmentRepository userDepartmentRepository,
-    IUserMapper mapper,
-    ICsvService csvService
+    IUserMapper mapper, ICsvService csvService, IDateTimeProvider dateTimeProvider
 ) : BaseService<User, UserDto>(repository, mapper), IUserService
 {
     private readonly IUserRepository _repo = repository;
     private readonly IUserMapper _mapper = mapper;
     private readonly ICsvService _csvService = csvService;
     private readonly IUserDepartmentRepository _userDepartmentRepo = userDepartmentRepository;
+    private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
     public async Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null)
     {
@@ -85,5 +86,18 @@ public class UserService(
         return new ImportCsvResponse(
             ImportedItems
         );
+    }
+
+    public async Task<ExportCsvResponse> ExportToCsvAsync(char? delimiter)
+    {
+        var users = await _repo.GetAllAsNoTracking()
+            .Include(s => s.UserDepartment)
+            .OrderBy(s => s.Code)
+            .ToListAsync();
+
+        var stream = _csvService.ExportToCsv(users.Select(_mapper.ToUserCsv), delimiter ?? ';');
+        var fileName = $"users-{_dateTimeProvider.UtcNow:dd-MM-yyyy-HH-mm-ss}.csv";
+
+        return new ExportCsvResponse(stream, fileName, "text/csv");
     }
 }

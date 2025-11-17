@@ -3,6 +3,7 @@ namespace API.Features.User;
 using API.Attributes;
 using API.Features.User.Get;
 using API.Features.User.Post;
+using Application.Interfaces.Services.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -36,6 +37,15 @@ public class UserController : ControllerBase
     {
         var response = await handler.HandleAsync(file);
         return Ok(response);
+    }
+
+    [HttpGet("export")]
+    public async Task<IActionResult> ExportStockItems(
+        [FromServices] IUserService service, [FromQuery] char? delimiter
+    )
+    {
+        var response = await service.ExportToCsvAsync(delimiter);
+        return File(response.Content, response.ContentType, response.FileName);
     }
 
     // [HttpGet]

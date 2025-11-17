@@ -10,4 +10,5 @@ public interface IUserService : IBaseService<User, UserDto>
 {
     Task<PaginatedResult<UserDto>> GetPaginatedUsersAsync(int page, int size, string? search = null);
     Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream);
+    Task<ExportCsvResponse> ExportToCsvAsync(char? delimiter);
 }
