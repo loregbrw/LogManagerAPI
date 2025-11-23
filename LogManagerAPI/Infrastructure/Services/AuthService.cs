@@ -2,12 +2,12 @@ namespace Infrastructure.Services;
 
 using System.Threading.Tasks;
 using Application.Entities;
+using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces.Mappers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Core.Auth;
-using Application.Models.Entities;
 using Application.Models.Requests.Auth;
 using Application.Models.Responses.Auth;
 
@@ -22,6 +22,9 @@ public class AuthService(IUserRepository repository, IPasswordHasher hasher, IJw
     {
         var user = await _repo.GetByEmailAsNoTrackingAsync(request.Email)
             ?? throw new NotFoundException("EntityNotFound", "Email");
+
+        if (user.Role == ERole.DATA)
+            throw new UnauthorizedException("NoAccess");
 
         if (user.Password is null)
             throw new UnauthorizedException("NoRegisteredPassword");
