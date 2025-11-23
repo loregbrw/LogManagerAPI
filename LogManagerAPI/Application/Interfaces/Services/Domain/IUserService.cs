@@ -18,4 +18,5 @@ public interface IUserService : IBaseService<User, UserDto>
     Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream);
     Task<ExportCsvResponse> ExportToCsvAsync(char? delimiter);
     GetValuesResponse GetUserRoles();
+    Task<UserDto> UpdateUserAsync(Guid userId, UpdateUserPayload payload);
 }

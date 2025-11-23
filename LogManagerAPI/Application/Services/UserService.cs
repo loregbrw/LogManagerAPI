@@ -44,7 +44,7 @@ public partial class UserService(
 
     public async Task<UserDto> CreateUserAsync(CreateUserPayload payload)
     {
-        if (payload.Email is not null && (await _repo.GetByCodeAsNoTrackingAsync(payload.Code)) is not null)
+        if (await _repo.GetByCodeAsNoTrackingAsync(payload.Code) is not null)
             throw new ConflictException("UserCodeAlreadyExists", payload.Code);
 
         if (payload.Email is not null && await _repo.GetAllAsNoTracking().AnyAsync(u => u.Email == payload.Email))
@@ -200,4 +200,50 @@ public partial class UserService(
         return (user, contextData);
     }
 
+    public async Task<UserDto> UpdateUserAsync(Guid userId, UpdateUserPayload payload)
+{
+    var user = await _repo.GetByIdAsync(userId)
+        ?? throw new NotFoundException("EntityNotFound", typeof(User));
+
+    if (payload.Code.HasValue && payload.Code.Value != user.Code)
+    {
+        if (await _repo.GetByCodeAsNoTrackingAsync(payload.Code.Value) is not null)
+            throw new ConflictException("UserCodeAlreadyExists", payload.Code.Value);
+        
+        user.Code = payload.Code.Value;
+    }
+
+    if (payload.Email is not null && payload.Email != user.Email)
+    {
+        if (await _repo.GetAllAsNoTracking().AnyAsync(u => u.Email == payload.Email))
+            throw new ConflictException("UserEmailAlreadyExists", payload.Email);
+        
+        user.Email = payload.Email;
+    }
+
+    if (payload.Name is not null) user.Name = payload.Name;
+
+    if (payload.UserDepartmentId.HasValue)
+    {
+        var department = await _userDepartmentRepo.GetByIdAsync(payload.UserDepartmentId.Value)
+            ?? throw new NotFoundException("EntityNotFound", typeof(UserDepartment));
+
+        user.UserDepartment = department;
+    }
+
+    if (payload.UserRole.HasValue) user.Role = payload.UserRole.Value;
+
+    if (payload.Password is not null)
+    {
+        if (!PasswordRegex().IsMatch(payload.Password))
+            throw new BadRequestException("InvalidPassword");
+
+        user.Password = _hasher.Hash(payload.Password);
+    }
+
+    _repo.Update(user);
+    await _repo.SaveChangesAsync();
+
+    return _mapper.ToDto(user);
+}
 }

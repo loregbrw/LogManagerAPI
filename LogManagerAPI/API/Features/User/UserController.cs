@@ -2,6 +2,7 @@ namespace API.Features.User;
 
 using API.Attributes;
 using API.Features.User.Get;
+using API.Features.User.Patch;
 using API.Features.User.Post;
 using Application.Interfaces.Services.Domain;
 using Application.Models.Requests.User;
@@ -38,7 +39,7 @@ public class UserController : ControllerBase
     )
     {
         var result = await service.CreateUserAsync(payload);
-        return Created("api/users", result);
+        return Created("/api/users", result);
     }
 
     [HttpPost("import")]
@@ -101,11 +102,12 @@ public class UserController : ControllerBase
         return Ok(response);
     }
 
-    // [HttpGet]
-    // public async Task<IActionResult> GetUsers(
-    //     [FromServices] IUserService service
-    // )
-    // {
-    //     var aa = await service.
-    // }
+    [HttpPatch]
+    public async Task<IActionResult> UpdateUser(
+        [FromServices] UpdateUserHandler handler, [FromBody] UpdateUserPayload payload, [FromQuery] Guid? userId
+    )
+    {
+        var result = await handler.HandleAsync(userId, payload);
+        return Ok(result);
+    }
 }
