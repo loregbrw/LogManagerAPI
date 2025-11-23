@@ -44,6 +44,9 @@ public partial class UserService(
 
     public async Task<UserDto> CreateUserAsync(CreateUserPayload payload)
     {
+        if (payload.Email is not null && (await _repo.GetByCodeAsNoTrackingAsync(payload.Code)) is not null)
+            throw new ConflictException("UserCodeAlreadyExists", payload.Code);
+
         if (payload.Email is not null && await _repo.GetAllAsNoTracking().AnyAsync(u => u.Email == payload.Email))
             throw new ConflictException("UserEmailAlreadyExists", payload.Email);
 
