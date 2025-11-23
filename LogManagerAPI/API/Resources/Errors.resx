@@ -90,6 +90,11 @@
         <value>User hasn't registered a password yet.</value>
     </data>
 
+    <data name="NoAccess"
+        xml:space="preserve">
+        <value>User doesn't have access.</value>
+    </data>
+
     <!-- CONFLICT -->
 
     <data name="UserCodeAlreadyExists"
