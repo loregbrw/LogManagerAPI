@@ -4,7 +4,6 @@ using System;
 using API.Attributes;
 using Application.Enums;
 using Application.Exceptions;
-using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Core.Auth;
 using Microsoft.AspNetCore.Http;
 
@@ -28,7 +27,7 @@ public class AuthenticationMiddleware(IJwtService jwtService, IUserContext userC
         if (!TryGetBearerToken(auth, out var token))
             throw new BadRequestException("MissingAuthorizationHeader");
 
-        _jwtService.ValidateToken(token!);
+        _jwtService.ValidateTokenAndFillContext(token!);
 
         if (!UserCanAccess(endpoint, _userContext))
             throw new ForbiddenException("ForbiddenEndpoint");
@@ -43,8 +42,8 @@ public class AuthenticationMiddleware(IJwtService jwtService, IUserContext userC
     {
         if (endpoint is null) return false;
 
-        if (context.UserRole == ERole.ADMIN)
-            return true;
+        if (context.UserRole == ERole.DATA) return false;
+        if (context.UserRole == ERole.ADMIN) return true;
 
         if (endpoint.Metadata.GetMetadata<AdminAuthenticationAttribute>() is not null)
             return false;
@@ -55,10 +54,11 @@ public class AuthenticationMiddleware(IJwtService jwtService, IUserContext userC
         return true;
     }
 
+
     private static bool TryGetBearerToken(string? authHeader, out string? token)
     {
         token = null;
-        
+
         if (string.IsNullOrWhiteSpace(authHeader))
             return false;
 

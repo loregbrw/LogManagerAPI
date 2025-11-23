@@ -1,6 +1,7 @@
 namespace Application.Interfaces.Services.Core;
 
-public interface IEmailTemplateService
+public interface IEmailTemplateHelper
 {
     string GetRegistrationEmail(string token);
+    public string GetSubject();
 }

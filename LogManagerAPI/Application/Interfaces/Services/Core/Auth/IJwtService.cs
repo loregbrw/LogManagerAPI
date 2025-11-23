@@ -1,9 +1,11 @@
-namespace Application.Interfaces.Services.Core;
+namespace Application.Interfaces.Services.Core.Auth;
 
-using Application.Models.Entities;
+using Application.Enums;
+using Application.Models;
 
 public interface IJwtService
 {
-    string GenerateToken(UserDto user);
-    void ValidateToken(string token);
+    string GenerateToken(Guid userId, ERole userRole, TimeSpan? timeSpan = null);
+    ContextData ValidateToken(string token);
+    void ValidateTokenAndFillContext(string token);
 }

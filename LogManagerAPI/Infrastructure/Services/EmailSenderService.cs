@@ -9,13 +9,12 @@ using Microsoft.Extensions.Options;
 public class EmailSenderService(IOptions<EmailSenderOptions> options) : IEmailSenderService
 {
     private readonly EmailSenderOptions _options = options.Value;
-    private const string displayName = "Equipe LogManager";
 
     public void SendEmail(string recipient, string subject, string body)
     {
         var mail = new MailMessage
         {
-            From = new MailAddress(_options.Email, displayName),
+            From = new MailAddress(_options.Email, _options.DisplayName),
             Subject = subject,
             Body = body,
             IsBodyHtml = false
