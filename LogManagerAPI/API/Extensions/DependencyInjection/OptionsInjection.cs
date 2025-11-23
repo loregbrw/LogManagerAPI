@@ -21,5 +21,9 @@ public static class OptionsInjection
         builder.Services.Configure<JwtOptions>(
             builder.Configuration.GetSection("Jwt")
         );
+
+        builder.Services.Configure<RegistrationEmailOptions>(
+            builder.Configuration.GetSection("RegistrationEmail")
+        );
     }
 }

@@ -6,10 +6,8 @@ using System.Text;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Exceptions.Primitives;
-using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Core.Auth;
 using Application.Models;
-using Application.Models.Entities;
 using Application.Models.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -30,29 +28,29 @@ public class JwtService : IJwtService
         _credentials = new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256);
     }
 
-    public string GenerateToken(UserDto user)
+    public string GenerateToken(Guid userId, ERole userRole, TimeSpan? timeSpan = null)
     {
         var claims = new List<Claim>
         {
-            new("UserId", user.Id.ToString()),
-            new("UserRole", user.Role.ToString()),
+            new("UserId", userId.ToString()),
+            new("UserRole", userRole.ToString()),
         };
 
         var token = new JwtSecurityToken(
             issuer: _settings.Issuer,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(_settings.ExpirationInMinutes),
+            expires: DateTime.UtcNow.Add(timeSpan ?? TimeSpan.FromMinutes(_settings.ExpirationInMinutes)),
             signingCredentials: _credentials
         );
 
         return _tokenHandler.WriteToken(token);
     }
 
-    public void ValidateToken(string jwt)
+    public ContextData ValidateToken(string token)
     {
         try
         {
-            var claimsPrincipal = _tokenHandler.ValidateToken(jwt,
+            var claimsPrincipal = _tokenHandler.ValidateToken(token,
                 new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -76,7 +74,7 @@ public class JwtService : IJwtService
             if (!Enum.TryParse<ERole>(userRole, out var parsedUserRole))
                 throw new BadRequestException("InvalidClaim", "UserRole");
 
-            _userContext.Fill(new ContextData(parsedUserId, parsedUserRole));
+            return new ContextData(parsedUserId, parsedUserRole);
         }
         catch (SecurityTokenArgumentException)
         {
@@ -94,5 +92,11 @@ public class JwtService : IJwtService
         {
             throw new InternalServerErrorException("TokenValidationFailed");
         }
+    }
+
+    public void ValidateTokenAndFillContext(string jwt)
+    {
+        var contextData = ValidateToken(jwt);
+        _userContext.Fill(contextData);
     }
 }

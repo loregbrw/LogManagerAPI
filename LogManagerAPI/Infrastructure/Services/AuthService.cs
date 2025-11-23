@@ -23,11 +23,14 @@ public class AuthService(IUserRepository repository, IPasswordHasher hasher, IJw
         var user = await _repo.GetByEmailAsNoTrackingAsync(request.Email)
             ?? throw new NotFoundException("EntityNotFound", "Email");
 
+        if (user.Password is null)
+            throw new UnauthorizedException("NoRegisteredPassword");
+
         if (!_hasher.Verify(request.Password, user.Password))
             throw new UnauthorizedException("WrongPassword");
 
         var dto = _mapper.ToDto(user);
-        var token = _jwtService.GenerateToken(dto);
+        var token = _jwtService.GenerateToken(user.Id, user.Role);
 
         return new LoginResponse(
             token,

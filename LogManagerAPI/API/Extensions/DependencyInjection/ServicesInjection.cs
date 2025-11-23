@@ -5,6 +5,7 @@ using API.Features.StockItem.Post;
 using API.Features.User.Get;
 using API.Features.User.Post;
 using Application.Interfaces.Services.Core;
+using Application.Interfaces.Services.Core.Auth;
 using Application.Interfaces.Services.Domain;
 using Application.Interfaces.Services.Domain.Primitives;
 using Application.Services;
