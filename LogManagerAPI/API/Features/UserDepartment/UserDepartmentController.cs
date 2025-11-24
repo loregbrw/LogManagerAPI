@@ -1,8 +1,5 @@
 namespace API.Features.UserDepartment;
 
-using API.Attributes;
-using API.Features.User.Get;
-using API.Features.User.Post;
 using Application.Interfaces.Services.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +15,4 @@ public class UserDepartmentController : ControllerBase
         var response = await service.GetUserDepartmentValues();
         return Ok(response);
     }
-
-    // [HttpGet]
-    // public async Task<IActionResult> GetUsers(
-    //     [FromServices] IUserService service
-    // )
-    // {
-    //     var aa = await service.
-    // }
 }

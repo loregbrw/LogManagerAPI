@@ -34,6 +34,8 @@ public static class ServicesInjection
 
         services.AddScoped<IUserDepartmentService, UserDepartmentService>();
 
+        services.AddScoped<IUnitOfMeasurementService, UnitOfMeasurementService>();
+
         return services;
     }
 }

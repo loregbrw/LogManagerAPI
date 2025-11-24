@@ -1,0 +1,19 @@
+namespace API.Features.UnitOfMeasurement;
+
+using Application.Interfaces.Services.Domain;
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/unit-of-measurements")]
+public class UnitOfMeasurementController : ControllerBase
+{
+    [HttpGet("values")]
+    public async Task<IActionResult> GetUnitOfMeasurements(
+        [FromServices] IUnitOfMeasurementService service
+    )
+    {
+        var response = await service.GetUnitOfMeasurementValues();
+        return Ok(response);
+    }
+
+}
