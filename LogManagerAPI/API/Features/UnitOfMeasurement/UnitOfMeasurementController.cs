@@ -4,7 +4,7 @@ using Application.Interfaces.Services.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/unit-of-measurements")]
+[Route("api/units-of-measurement")]
 public class UnitOfMeasurementController : ControllerBase
 {
     [HttpGet("values")]
