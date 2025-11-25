@@ -18,7 +18,7 @@ public class AuthService(IUserRepository repository, IPasswordHasher hasher, IJw
     private readonly IJwtService _jwtService = jwtService;
     private readonly IUserMapper _mapper = mapper;
 
-    public async Task<LoginResponse> LoginAsync(LoginRequest request)
+    public async Task<LoginResponse> LoginAsync(LoginPayload request)
     {
         var user = await _repo.GetByEmailAsNoTrackingAsync(request.Email)
             ?? throw new NotFoundException("EntityNotFound", "Email");

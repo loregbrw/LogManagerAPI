@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 public class UnitOfMeasurementController : ControllerBase
 {
     [HttpGet("values")]
-    public async Task<IActionResult> GetUnitOfMeasurements(
+    public async Task<IActionResult> GetUnitOfMeasurementValues(
         [FromServices] IUnitOfMeasurementService service
     )
     {

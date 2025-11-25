@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 public class UserDepartmentController : ControllerBase
 {
     [HttpGet("values")]
-    public async Task<IActionResult> GetUserDepartments(
+    public async Task<IActionResult> GetUserDepartmentValues(
         [FromServices] IUserDepartmentService service
     )
     {

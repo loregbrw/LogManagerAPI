@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-public class LoginRequest
+public class LoginPayload
 {
     [Required]
     [StringLength(255)]

@@ -12,7 +12,7 @@ public class AuthController : ControllerBase
     [HttpPost]
     [IgnoreAuthentication]
     public async Task<IActionResult> Login(
-        [FromServices] IAuthService service, [FromBody] LoginRequest request
+        [FromServices] IAuthService service, [FromBody] LoginPayload request
     )
     {
         var response = await service.LoginAsync(request);

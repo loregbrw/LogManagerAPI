@@ -5,5 +5,5 @@ using Application.Models.Responses.Auth;
 
 public interface IAuthService
 {
-    Task<LoginResponse> LoginAsync(LoginRequest request);
+    Task<LoginResponse> LoginAsync(LoginPayload request);
 }

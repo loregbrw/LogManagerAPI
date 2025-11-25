@@ -3,7 +3,7 @@ namespace Infrastructure.Services;
 using System.Reflection;
 using Application.Attributes;
 using Application.Interfaces.Services.Core;
-using Application.Models.Responses.Enum;
+using Application.Models.Responses.Value;
 
 public class EnumHelper : IEnumHelper
 {

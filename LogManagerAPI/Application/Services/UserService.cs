@@ -18,7 +18,7 @@ using Application.Models.Entities;
 using Application.Models.Pagination;
 using Application.Models.Requests.User;
 using Application.Models.Responses.Csv;
-using Application.Models.Responses.Enum;
+using Application.Models.Responses.Value;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 

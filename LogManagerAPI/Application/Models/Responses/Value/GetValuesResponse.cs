@@ -1,4 +1,4 @@
-namespace Application.Models.Responses.Enum;
+namespace Application.Models.Responses.Value;
 
 public record GetValuesResponse(
     IEnumerable<ValueResponse> Values

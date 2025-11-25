@@ -1,6 +1,6 @@
 namespace Application.Interfaces.Services.Core;
 
-using Application.Models.Responses.Enum;
+using Application.Models.Responses.Value;
 
 public interface IEnumHelper
 {
