@@ -28,6 +28,8 @@ public static class ServicesInjection
         services.AddScoped<ImportStockItemsHandler>();
         services.AddScoped<IStockItemService, StockItemService>();
 
+        services.AddScoped<IStockSubgroupService, StockSubgroupService>();
+
         services.AddScoped<IUnitOfMeasurementService, UnitOfMeasurementService>();
 
         services.AddScoped<IUserDepartmentService, UserDepartmentService>();

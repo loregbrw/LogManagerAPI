@@ -11,6 +11,7 @@ public static class MappersInjection
     {
         services.AddScoped<IStockDepartmentMapper, StockDepartmentMapper>();
         services.AddScoped<IStockItemMapper, StockItemMapper>();
+        services.AddScoped<IStockSubgroupMapper, StockSubgroupMapper>();
         services.AddScoped<IUnitOfMeasurementMapper, UnitOfMeasurementMapper>();
         services.AddScoped<IUserMapper, UserMapper>();
         services.AddScoped<IUserDepartmentMapper, UserDepartmentMapper>();
