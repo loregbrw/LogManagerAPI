@@ -5,7 +5,6 @@ using Application.Interfaces.Services.Core;
 using Application.Interfaces.Services.Core.Auth;
 using Infrastructure.Providers;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
 
 public static class AddOnsInjection
 {

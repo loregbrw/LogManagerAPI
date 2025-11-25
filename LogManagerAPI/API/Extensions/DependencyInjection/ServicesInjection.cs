@@ -22,19 +22,21 @@ public static class ServicesInjection
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthService, AuthService>();
 
-        services.AddScoped<GetLoggedUserHandler>();
-        services.AddScoped<GetPaginatedUsersHandler>();
-        services.AddScoped<ImportUsersHandler>();
-        services.AddScoped<UpdateUserHandler>();
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IStockDepartmentService, StockDepartmentService>();
 
         services.AddScoped<GetPaginatedStockItemsHandler>();
         services.AddScoped<ImportStockItemsHandler>();
         services.AddScoped<IStockItemService, StockItemService>();
 
+        services.AddScoped<IUnitOfMeasurementService, UnitOfMeasurementService>();
+
         services.AddScoped<IUserDepartmentService, UserDepartmentService>();
 
-        services.AddScoped<IUnitOfMeasurementService, UnitOfMeasurementService>();
+        services.AddScoped<GetLoggedUserHandler>();
+        services.AddScoped<GetPaginatedUsersHandler>();
+        services.AddScoped<ImportUsersHandler>();
+        services.AddScoped<UpdateUserHandler>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }
