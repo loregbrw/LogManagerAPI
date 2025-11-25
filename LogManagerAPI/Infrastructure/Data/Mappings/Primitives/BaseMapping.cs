@@ -13,6 +13,7 @@ public abstract class BaseMapping<T> : IEntityTypeConfiguration<T> where T : Bas
 
         builder.Property(e => e.Id)
                .HasColumnName("id")
+               .HasDefaultValueSql("gen_random_uuid()")
                .ValueGeneratedOnAdd();
 
         builder.Property(e => e.CreatedAt)

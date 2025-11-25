@@ -2,7 +2,7 @@ namespace Application.Entities.Primitives;
 
 public abstract class BaseEntity
 {
-    public Guid Id { get; } = Guid.NewGuid();
+    public Guid Id { get; }
 
     public DateTime CreatedAt { get; set; }
 
