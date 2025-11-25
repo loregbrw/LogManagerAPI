@@ -17,8 +17,8 @@ public class StockItemController : ControllerBase
         [FromQuery] EStockGroup? group, [FromQuery] EStockItemStatus? status
     )
     {
-        var response = await handler.HandleAsync(query, page, count, group, status);
-        return Ok(response);
+        var result = await handler.HandleAsync(query, page, count, group, status);
+        return Ok(result);
     }
 
     [HttpPost("import")]
@@ -26,8 +26,8 @@ public class StockItemController : ControllerBase
         [FromServices] ImportStockItemsHandler handler, [FromForm] IFormFile file
     )
     {
-        var response = await handler.HandleAsync(file);
-        return Ok(response);
+        var result = await handler.HandleAsync(file);
+        return Ok(result);
     }
 
     [HttpGet("export")]
@@ -35,7 +35,7 @@ public class StockItemController : ControllerBase
         [FromServices] IStockItemService service, [FromQuery] char? delimiter
     )
     {
-        var response = await service.ExportToCsvAsync(delimiter);
-        return File(response.Content, response.ContentType, response.FileName);
+        var result = await service.ExportToCsvAsync(delimiter);
+        return File(result.Content, result.ContentType, result.FileName);
     }
 }

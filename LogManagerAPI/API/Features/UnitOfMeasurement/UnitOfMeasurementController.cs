@@ -12,8 +12,8 @@ public class UnitOfMeasurementController : ControllerBase
         [FromServices] IUnitOfMeasurementService service
     )
     {
-        var response = await service.GetUnitOfMeasurementValues();
-        return Ok(response);
+        var result = await service.GetUnitOfMeasurementValues();
+        return Ok(result);
     }
 
 }

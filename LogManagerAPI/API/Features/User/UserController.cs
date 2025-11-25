@@ -19,8 +19,8 @@ public class UserController : ControllerBase
         [FromQuery] string? query, [FromQuery] int? page, [FromQuery] int? count
     )
     {
-        var response = await handler.HandleAsync(query, page, count);
-        return Ok(response);
+        var result = await handler.HandleAsync(query, page, count);
+        return Ok(result);
     }
 
     [HttpGet]
@@ -28,8 +28,8 @@ public class UserController : ControllerBase
         [FromServices] GetLoggedUserHandler handler
     )
     {
-        var response = await handler.HandleAsync();
-        return Ok(response);
+        var result = await handler.HandleAsync();
+        return Ok(result);
     }
 
     [HttpPost]
@@ -48,8 +48,8 @@ public class UserController : ControllerBase
         [FromServices] ImportUsersHandler handler, [FromForm] IFormFile file
     )
     {
-        var response = await handler.HandleAsync(file);
-        return Ok(response);
+        var result = await handler.HandleAsync(file);
+        return Ok(result);
     }
 
     [HttpPost("register")]
@@ -88,8 +88,8 @@ public class UserController : ControllerBase
         [FromServices] IUserService service, [FromQuery] char? delimiter
     )
     {
-        var response = await service.ExportToCsvAsync(delimiter);
-        return File(response.Content, response.ContentType, response.FileName);
+        var result = await service.ExportToCsvAsync(delimiter);
+        return File(result.Content, result.ContentType, result.FileName);
     }
 
     [HttpGet("roles/values")]
@@ -98,8 +98,8 @@ public class UserController : ControllerBase
         [FromServices] IUserService service
     )
     {
-        var response = service.GetUserRoles();
-        return Ok(response);
+        var result = service.GetUserRoles();
+        return Ok(result);
     }
 
     [HttpPatch]

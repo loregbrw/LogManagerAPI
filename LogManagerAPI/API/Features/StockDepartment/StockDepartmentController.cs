@@ -12,7 +12,7 @@ public class StockDepartmentController : ControllerBase
         [FromServices] IStockDepartmentService service
     )
     {
-        var response = await service.GetStockDepartmentValues();
-        return Ok(response);
+        var result = await service.GetStockDepartmentValues();
+        return Ok(result);
     }
 }

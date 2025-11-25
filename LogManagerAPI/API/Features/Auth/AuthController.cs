@@ -15,7 +15,7 @@ public class AuthController : ControllerBase
         [FromServices] IAuthService service, [FromBody] LoginPayload request
     )
     {
-        var response = await service.LoginAsync(request);
-        return Ok(response);
+        var result = await service.LoginAsync(request);
+        return Ok(result);
     }
 }
