@@ -97,6 +97,12 @@
 
     <!-- CONFLICT -->
 
+    <data name="AlreadyExists"
+        xml:space="preserve">
+        <value>{0} already exists on the database.</value>
+    </data>
+
+
     <data name="UserCodeAlreadyExists"
         xml:space="preserve">
         <value>A user with the code {0} already exists.</value>
