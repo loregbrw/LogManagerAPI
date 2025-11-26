@@ -1,5 +1,6 @@
 ﻿namespace API.Features.StockItem;
 
+using API.Attributes;
 using API.Features.StockItem.Get;
 using API.Features.StockItem.Post;
 using Application.Enums;
@@ -35,11 +36,12 @@ public class StockItemController : ControllerBase
         [FromServices] IStockItemService service, [FromBody] CreateStockItemPayload payload
     )
     {
-        var result = service.
+        var result = service.CreateStockItemAsync(payload);
         return Ok(result);
     }
 
     [HttpPost("import")]
+    [ManagerAuthentication]
     public async Task<IActionResult> ImportStockItems(
         [FromServices] ImportStockItemsHandler handler, [FromForm] IFormFile file
     )
@@ -49,6 +51,7 @@ public class StockItemController : ControllerBase
     }
 
     [HttpGet("export")]
+    [ManagerAuthentication]
     public async Task<IActionResult> ExportStockItems(
         [FromServices] IStockItemService service, [FromQuery] char? delimiter
     )

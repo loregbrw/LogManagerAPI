@@ -4,6 +4,7 @@ using Application.Entities;
 using Application.Enums;
 using Application.Interfaces.Services.Domain.Primitives;
 using Application.Models.Entities;
+using Application.Models.Requests.StockItem;
 using Application.Models.Responses.Csv;
 using Application.Models.Responses.StockItem;
 using Application.Models.Responses.Value;
@@ -18,7 +19,7 @@ public interface IStockItemService : IBaseService<StockItem, StockItemDto>
         EStockGroup? stockGroup = null,
         EStockItemStatus? status = null
     );
-
+    Task<StockItemDto> CreateStockItemAsync(CreateStockItemPayload payload);
     Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream);
     Task<ExportCsvResponse> ExportToCsvAsync(char? delimiter);
 }

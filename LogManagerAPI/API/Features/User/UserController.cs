@@ -65,7 +65,7 @@ public class UserController : ControllerBase
     [HttpGet("register")]
     [IgnoreAuthentication]
     public async Task<IActionResult> GetRegisteringUser(
-    [FromServices] IUserService service, [FromQuery] string token
+        [FromServices] IUserService service, [FromQuery] string token
     )
     {
         var result = await service.GetRegisteringUserAsync(token);
