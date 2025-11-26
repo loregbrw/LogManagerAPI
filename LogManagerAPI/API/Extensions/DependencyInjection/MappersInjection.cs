@@ -9,6 +9,7 @@ public static class MappersInjection
 {
     public static IServiceCollection AddMappers(this IServiceCollection services)
     {
+        services.AddScoped<IRegisterMapper, RegisterMapper>();
         services.AddScoped<IStockDepartmentMapper, StockDepartmentMapper>();
         services.AddScoped<IStockItemMapper, StockItemMapper>();
         services.AddScoped<IStockSubgroupMapper, StockSubgroupMapper>();

@@ -36,7 +36,7 @@ public class StockItemController : ControllerBase
         [FromServices] IStockItemService service, [FromBody] CreateStockItemPayload payload
     )
     {
-        var result = service.CreateStockItemAsync(payload);
+        var result = await service.CreateStockItemAsync(payload);
         return Ok(result);
     }
 

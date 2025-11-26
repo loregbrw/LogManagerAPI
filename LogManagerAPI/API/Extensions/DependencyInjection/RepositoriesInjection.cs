@@ -11,6 +11,7 @@ public static class Repositories
     {
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
+        services.AddScoped<IRegisterRepository, RegisterRepository>();
         services.AddScoped<IStockDepartmentRepository, StockDepartmentRepository>();
         services.AddScoped<IStockItemRepository, StockItemRepository>();
         services.AddScoped<IStockSubgroupRepository, StockSubgroupRepository>();

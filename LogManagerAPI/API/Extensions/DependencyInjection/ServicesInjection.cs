@@ -1,5 +1,6 @@
 namespace API.Extensions.DependencyInjection;
 
+using API.Features.Register.Post;
 using API.Features.StockItem.Get;
 using API.Features.StockItem.Post;
 using API.Features.User.Get;
@@ -21,6 +22,9 @@ public static class ServicesInjection
 
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthService, AuthService>();
+
+        services.AddScoped<CreateRegisterHandler>();
+        services.AddScoped<IRegisterService, RegisterService>();
 
         services.AddScoped<IStockDepartmentService, StockDepartmentService>();
 
