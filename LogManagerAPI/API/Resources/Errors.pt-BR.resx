@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <xsd:schema id="root"
-                xmlns=""
-                xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        xmlns=""
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
         <xsd:element name="root"
                      msdata:IsDataSet="true">
@@ -30,8 +30,172 @@
             </xsd:complexType>
         </xsd:element>
     </xsd:schema>
-    <data name="EntityNotFound"
-          xml:space="preserve">
+
+    <!-- SERVER ERROR -->
+
+    <data name="UnknownError" xml:space="preserve">
+        <value>Erro interno desconhecido.</value>
+    </data>
+
+    <data name="UnknownErrorMapping" xml:space="preserve">
+        <value>Erro desconhecido ao mapear entidade.</value>
+    </data>
+
+    <!-- NOT FOUND -->
+
+    <data name="EntityNotFound" xml:space="preserve">
         <value>{0} não encontrado.</value>
+    </data>
+
+    <!-- BAD REQUEST -->
+
+    <data name="NullOrWhiteSpace" xml:space="preserve">
+        <value>{0} não pode ser nulo ou conter apenas espaços em branco.</value>
+    </data>
+
+    <data name="FieldTooLong" xml:space="preserve">
+        <value>{0} não pode ter mais que {1} caracteres.</value>
+    </data>
+
+    <data name="FieldRequired" xml:space="preserve">
+        <value>{0} é obrigatório.</value>
+    </data>
+
+    <data name="InvalidEnumValue" xml:space="preserve">
+        <value>{1} não é um valor válido para {0}.</value>
+    </data>
+
+    <data name="InvalidPassword" xml:space="preserve">
+        <value>Senha inválida: mínimo de 8 caracteres, 1 número, 1 letra e 1 caractere especial.</value>
+    </data>
+
+    <data name="InsufficientBalance" xml:space="preserve">
+        <value>Saldo insuficiente para saque.</value>
+    </data>
+
+    <!-- AUTH -->
+
+    <data name="WrongPassword" xml:space="preserve">
+        <value>Senha incorreta.</value>
+    </data>
+
+    <data name="NotAuthenticated" xml:space="preserve">
+        <value>Usuário não autenticado.</value>
+    </data>
+
+    <data name="NoRegisteredPassword" xml:space="preserve">
+        <value>Usuário ainda não registrou uma senha.</value>
+    </data>
+
+    <data name="NoAccess" xml:space="preserve">
+        <value>Usuário não possui acesso.</value>
+    </data>
+
+    <!-- CONFLICT -->
+
+    <data name="AlreadyExists" xml:space="preserve">
+        <value>{0} já existe no banco de dados.</value>
+    </data>
+
+    <data name="UserCodeAlreadyExists" xml:space="preserve">
+        <value>Já existe um usuário com o código {0}.</value>
+    </data>
+
+    <data name="UserEmailAlreadyExists" xml:space="preserve">
+        <value>Já existe um usuário com o e-mail {0}.</value>
+    </data>
+
+    <data name="UserAlreadyRegistered" xml:space="preserve">
+        <value>O usuário {0} já está registrado.</value>
+    </data>
+
+    <data name="MissingRegistrationEmail" xml:space="preserve">
+        <value>Não é possível completar o registro de um usuário sem e-mail cadastrado.</value>
+    </data>
+
+    <!-- CSV -->
+
+    <data name="EmptyCsv" xml:space="preserve">
+        <value>O arquivo CSV está vazio.</value>
+    </data>
+
+    <data name="MissingFieldCsv" xml:space="preserve">
+        <value>Campo ausente na posição {0}.</value>
+    </data>
+
+    <data name="BadDataCsv" xml:space="preserve">
+        <value>Dado inválido encontrado na linha {0}.</value>
+    </data>
+
+    <data name="InvalidHeaderCsv" xml:space="preserve">
+        <value>Cabeçalho do CSV inválido.</value>
+    </data>
+
+    <data name="ErrorProcessingCsv" xml:space="preserve">
+        <value>Erro ao processar CSV: {0}.</value>
+    </data>
+
+    <data name="MissingCsv" xml:space="preserve">
+        <value>CSV não encontrado.</value>
+    </data>
+
+    <data name="MissingHeader" xml:space="preserve">
+        <value>O CSV está sem cabeçalho.</value>
+    </data>
+
+    <data name="DuplicateHeaders" xml:space="preserve">
+        <value>Foram encontrados cabeçalhos duplicados para a propriedade {0} no CSV.</value>
+    </data>
+
+    <data name="NoMatchingHeaders" xml:space="preserve">
+        <value>Nenhum cabeçalho correspondente encontrado no CSV.</value>
+    </data>
+
+    <data name="InvalidCurrencyFormat" xml:space="preserve">
+        <value>Formato de moeda inválido para {0}.</value>
+    </data>
+
+    <data name="InvalidCurrencyType" xml:space="preserve">
+        <value>Tipo {0} inválido para conversão monetária. Esperado decimal ou tipo numérico.</value>
+    </data>
+
+    <data name="InvalidDelimiter" xml:space="preserve">
+        <value>Delimitador CSV inválido. Delimitadores permitidos: ; | , e tab.</value>
+    </data>
+
+    <!-- TOKEN -->
+
+    <data name="MissingClaim" xml:space="preserve">
+        <value>O token está sem o claim {0}.</value>
+    </data>
+
+    <data name="InvalidClaim" xml:space="preserve">
+        <value>Claim {0} inválido.</value>
+    </data>
+
+    <data name="TokenExpired" xml:space="preserve">
+        <value>Token expirado.</value>
+    </data>
+
+    <data name="InvalidToken" xml:space="preserve">
+        <value>Token inválido.</value>
+    </data>
+
+    <data name="TokenValidationFailed" xml:space="preserve">
+        <value>Falha na validação do token.</value>
+    </data>
+
+    <data name="MissingAuthorizationHeader" xml:space="preserve">
+        <value>Header Authorization ausente ou inválido.</value>
+    </data>
+
+    <data name="ForbiddenEndpoint" xml:space="preserve">
+        <value>Você não tem permissão para acessar este endpoint.</value>
+    </data>
+
+    <!-- USER -->
+
+    <data name="UserMissingEmail" xml:space="preserve">
+        <value>O usuário não possui um e-mail registrado.</value>
     </data>
 </root>
