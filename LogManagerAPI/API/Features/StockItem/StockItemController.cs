@@ -4,6 +4,7 @@ using API.Features.StockItem.Get;
 using API.Features.StockItem.Post;
 using Application.Enums;
 using Application.Interfaces.Services.Domain;
+using Application.Models.Requests.StockItem;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -26,6 +27,15 @@ public class StockItemController : ControllerBase
     )
     {
         var result = await handler.HandleAsync(query, page, count, group, status);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateStockItem(
+        [FromServices] IStockItemService service, [FromBody] CreateStockItemPayload payload
+    )
+    {
+        var result = service.
         return Ok(result);
     }
 

@@ -50,8 +50,4 @@ public class StockItemCsv
 
     [AppAlias("ATUAL")]
     public long Current { get; set; } = 0;
-
-    [AppAlias("SITUAÇÃO")]
-    [AppConverter(typeof(AppEnumFlexibleConverter<EStockSituation>))]
-    public EStockSituation? Situation { get; set; }
 }

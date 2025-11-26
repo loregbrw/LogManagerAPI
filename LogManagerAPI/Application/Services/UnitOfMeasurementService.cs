@@ -6,7 +6,6 @@ using Application.Interfaces.Mappers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Domain;
 using Application.Models.Entities;
-using Application.Models.Responses.Enum;
 using Application.Models.Responses.Value;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;

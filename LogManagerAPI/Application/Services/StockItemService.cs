@@ -25,11 +25,11 @@ public class StockItemService(
     private readonly IStockItemRepository _repo = repository;
     private readonly IStockItemMapper _mapper = mapper;
     private readonly ICsvService _csvService = csvService;
-    private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository = unitOfMeasurementRepository;
-    private readonly IStockDepartmentRepository _stockDepartmentRepository = stockDepartmentRepository;
-    private readonly IStockSubgroupRepository _stockSubgroupRepository = stockSubgroupRepository;
+    private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepo = unitOfMeasurementRepository;
+    private readonly IStockDepartmentRepository _stockDepartmentRepo = stockDepartmentRepository;
+    private readonly IStockSubgroupRepository _stockSubgroupRepo = stockSubgroupRepository;
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
-    
+
     public async Task<GetValuesResponse> GetStockItemValuesAsync()
     {
         var values = await _repo.GetAllAsNoTracking()
@@ -39,7 +39,6 @@ public class StockItemService(
 
         return new GetValuesResponse(values);
     }
-
 
     public async Task<PaginatedStockItemResponse> GetPaginatedStockItemsAsync(
         int page,
@@ -87,12 +86,62 @@ public class StockItemService(
         );
     }
 
+    public async Task<StockItemDto> CreateStockItemAsync(CreateStockItemPayload payload)
+    {
+        var exists = await _repo.GetAllAsNoTracking()
+            .AnyAsync(s => EF.Functions.ILike(s.Code, payload.Code));
+
+        if (exists) throw new ConflictException("AlreadyExists", payload.Code);
+
+        var stockItem = new StockItem()
+        {
+            Code = payload.Code,
+            Description = payload.Description,
+            Localization = payload.Localization,
+            StockGroup = payload.StockGroup,
+            Cost = payload.Cost,
+            MinimumStock = payload.MinimumStock
+        };
+
+        if (payload.UnitOfMeasurementId.HasValue)
+        {
+            var unitOfMeasurement = await _unitOfMeasurementRepo.GetAll()
+                .SingleOrDefaultAsync(u => u.Id == payload.UnitOfMeasurementId.Value)
+                ?? throw new NotFoundException("EntityNotFound", typeof(UnitOfMeasurement));
+
+            stockItem.UnitOfMeasurement = unitOfMeasurement;
+        }
+
+        if (payload.StockDepartmentId.HasValue)
+        {
+            var stockDepartment = await _stockDepartmentRepo.GetAll()
+                .SingleOrDefaultAsync(u => u.Id == payload.StockDepartmentId.Value)
+                ?? throw new NotFoundException("EntityNotFound", typeof(StockDepartment));
+
+            stockItem.StockDepartment = stockDepartment;
+        }
+
+        if (payload.StockSubgroupId.HasValue)
+        {
+            var stockSubgroup = await _stockSubgroupRepo.GetAll()
+                .SingleOrDefaultAsync(u => u.Id == payload.StockSubgroupId.Value)
+                ?? throw new NotFoundException("EntityNotFound", typeof(StockSubgroup));
+
+            stockItem.StockSubgroup = stockSubgroup;
+        }
+
+        await _repo.AddAsync(stockItem);
+        await _repo.SaveChangesAsync();
+
+        return _mapper.ToDto(stockItem);
+    }
+
     public async Task<ImportCsvResponse> ImportFromCsvAsync(Stream fileStream)
     {
         var records = _csvService.ImportFromCsv<StockItemCsv>(fileStream);
-        var unitsOfMeasurement = await _unitOfMeasurementRepository.GetAll().ToDictionaryAsync(u => u.Name, d => d);
-        var stockDepartments = await _stockDepartmentRepository.GetAll().ToDictionaryAsync(s => s.Name, d => d);
-        var stockSubgroups = await _stockSubgroupRepository.GetAll().ToDictionaryAsync(s => s.Name, d => d);
+        var unitsOfMeasurement = await _unitOfMeasurementRepo.GetAll().ToDictionaryAsync(u => u.Name, d => d);
+        var stockDepartments = await _stockDepartmentRepo.GetAll().ToDictionaryAsync(s => s.Name, d => d);
+        var stockSubgroups = await _stockSubgroupRepo.GetAll().ToDictionaryAsync(s => s.Name, d => d);
 
         var existingCodes = (await _repo.GetAll().Select(s => s.Code).ToListAsync()).ToHashSet();
 

@@ -62,10 +62,5 @@ public class StockItemMapping : BaseMapping<StockItem>
         builder.Property(s => s.Current)
                .IsRequired()
                .HasColumnName("current");
-
-        builder.Property(s => s.StockSituation)
-               .HasColumnName("stock_situation")
-               .HasConversion<short>()
-               .HasColumnType("smallint");
     }
 }

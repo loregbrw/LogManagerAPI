@@ -17,5 +17,4 @@ public class StockItem : BaseEntity
     public long Inbound { get; set; } = 0;
     public long Outbound { get; set; } = 0;
     public long Current { get; set; } = 0;
-    public EStockSituation? StockSituation { get; set; }
 }

@@ -42,8 +42,7 @@ public class StockItemMapper : IStockItemMapper
             MinimumStock = entity.MinimumStock,
             Inbound = entity.Inbound,
             Outbound = entity.Outbound,
-            Current = entity.Current,
-            StockSituation = entity.Situation
+            Current = entity.Current
         };
     }
 
@@ -62,8 +61,7 @@ public class StockItemMapper : IStockItemMapper
             MinimumStock = entity.MinimumStock,
             Inbound = entity.Inbound,
             Outbound = entity.Outbound,
-            Current = entity.Current,
-            Situation = entity.StockSituation
+            Current = entity.Current
         };
     }
 }
