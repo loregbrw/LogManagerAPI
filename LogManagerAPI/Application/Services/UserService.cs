@@ -60,7 +60,7 @@ public partial class UserService(
         if (payload.UserDepartmentId.HasValue)
         {
             var department = await _userDepartmentRepo.GetByIdAsync(payload.UserDepartmentId.Value)
-                ?? throw new NotFoundException("EntityNotFound", typeof(UserDepartment));
+                ?? throw new NotFoundException("EntityNotFound", typeof(UserDepartment).Name);
 
             user.UserDepartment = department;
         }
@@ -74,7 +74,7 @@ public partial class UserService(
     public async Task RegisterUserAsync(RegisterNewUserPayload payload)
     {
         var user = await _repo.GetByIdAsNoTrackingAsync(payload.UserId)
-            ?? throw new NotFoundException("EntityNotFound", typeof(User));
+            ?? throw new NotFoundException("EntityNotFound", typeof(User).Name);
 
         if (user.Email is null)
             throw new BadRequestException("UserMissingEmail");
@@ -189,7 +189,7 @@ public partial class UserService(
         var contextData = _jwtService.ValidateToken(token);
 
         var user = await _repo.GetByIdAsync(contextData.UserId)
-            ?? throw new NotFoundException("EntityNotFound", typeof(User));
+            ?? throw new NotFoundException("EntityNotFound", typeof(User).Name);
 
         if (user.Email is null)
             throw new ConflictException("MissingRegistrationEmail");
@@ -203,7 +203,7 @@ public partial class UserService(
     public async Task<UserDto> UpdateUserAsync(Guid userId, UpdateUserPayload payload)
     {
         var user = await _repo.GetByIdAsync(userId)
-            ?? throw new NotFoundException("EntityNotFound", typeof(User));
+            ?? throw new NotFoundException("EntityNotFound", typeof(User).Name);
 
         if (payload.Code.HasValue && payload.Code.Value != user.Code)
         {
@@ -226,7 +226,7 @@ public partial class UserService(
         if (payload.UserDepartmentId.HasValue)
         {
             var department = await _userDepartmentRepo.GetByIdAsync(payload.UserDepartmentId.Value)
-                ?? throw new NotFoundException("EntityNotFound", typeof(UserDepartment));
+                ?? throw new NotFoundException("EntityNotFound", typeof(UserDepartment).Name);
 
             user.UserDepartment = department;
         }

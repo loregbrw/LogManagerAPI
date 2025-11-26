@@ -107,7 +107,7 @@ public class StockItemService(
         {
             var unitOfMeasurement = await _unitOfMeasurementRepo.GetAll()
                 .SingleOrDefaultAsync(u => u.Id == payload.UnitOfMeasurementId.Value)
-                ?? throw new NotFoundException("EntityNotFound", typeof(UnitOfMeasurement));
+                ?? throw new NotFoundException("EntityNotFound", typeof(UnitOfMeasurement).Name);
 
             stockItem.UnitOfMeasurement = unitOfMeasurement;
         }
@@ -116,7 +116,7 @@ public class StockItemService(
         {
             var stockDepartment = await _stockDepartmentRepo.GetAll()
                 .SingleOrDefaultAsync(u => u.Id == payload.StockDepartmentId.Value)
-                ?? throw new NotFoundException("EntityNotFound", typeof(StockDepartment));
+                ?? throw new NotFoundException("EntityNotFound", typeof(StockDepartment).Name);
 
             stockItem.StockDepartment = stockDepartment;
         }
@@ -125,7 +125,7 @@ public class StockItemService(
         {
             var stockSubgroup = await _stockSubgroupRepo.GetAll()
                 .SingleOrDefaultAsync(u => u.Id == payload.StockSubgroupId.Value)
-                ?? throw new NotFoundException("EntityNotFound", typeof(StockSubgroup));
+                ?? throw new NotFoundException("EntityNotFound", typeof(StockSubgroup).Name);
 
             stockItem.StockSubgroup = stockSubgroup;
         }

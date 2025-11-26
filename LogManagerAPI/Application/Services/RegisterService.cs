@@ -24,8 +24,8 @@ public class RegisterService(
 
     public async Task<RegisterDto> CreateRegisterAsync(CreateRegisterPayload payload, Guid userId)
     {
-        var user = await _userRepo.GetByIdAsync(userId) ?? throw new NotFoundException("EntityNotFound", typeof(User));
-        var stockItem = await _stockItemRepo.GetByIdAsync(payload.StockItemId) ?? throw new NotFoundException("EntityNotFound", typeof(StockItem));
+        var user = await _userRepo.GetByIdAsync(userId) ?? throw new NotFoundException("EntityNotFound", typeof(User).Name);
+        var stockItem = await _stockItemRepo.GetByIdAsync(payload.StockItemId) ?? throw new NotFoundException("EntityNotFound", typeof(StockItem).Name);
 
         switch (payload.RegisterType)
         {
