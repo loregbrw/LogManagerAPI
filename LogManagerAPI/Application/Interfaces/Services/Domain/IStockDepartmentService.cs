@@ -8,6 +8,6 @@ using Application.Models.Responses.Value;
 
 public interface IStockDepartmentService : IBaseService<StockDepartment, StockDepartmentDto>
 {
-    Task<GetValuesResponse> GetStockDepartmentValues();
+    Task<GetValuesResponse> GetStockDepartmentValuesAsync();
     Task<StockDepartmentDto> CreateStockDepartmentAsync(CreateStockDepartmentPayload payload);
 }

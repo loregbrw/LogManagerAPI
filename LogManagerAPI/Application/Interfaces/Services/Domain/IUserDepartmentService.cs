@@ -7,5 +7,5 @@ using Application.Models.Responses.Value;
 
 public interface IUserDepartmentService : IBaseService<UserDepartment, UserDepartmentDto>
 {
-    Task<GetValuesResponse> GetUserDepartmentValues();
+    Task<GetValuesResponse> GetUserDepartmentValuesAsync();
 }

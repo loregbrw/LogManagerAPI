@@ -18,7 +18,7 @@ public class UserDepartmentService(
 
     private readonly IUserDepartmentRepository _repo = repository;
 
-    public async Task<GetValuesResponse> GetUserDepartmentValues()
+    public async Task<GetValuesResponse> GetUserDepartmentValuesAsync()
     {
         var values = await _repo.GetAllAsNoTracking()
             .OrderBy(d => d.Name)

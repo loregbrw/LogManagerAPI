@@ -19,11 +19,11 @@ public class StockSubgroupService(
     private readonly IStockSubgroupRepository _repo = repository;
     private readonly IStockSubgroupMapper _mapper = mapper;
 
-    public async Task<GetValuesResponse> GetStockSubgroupValues()
+    public async Task<GetValuesResponse> GetStockSubgroupValuesAsync()
     {
         var values = await _repo.GetAllAsNoTracking()
-            .OrderBy(d => d.Name)
-            .Select(d => new ValueResponse(d.Id.ToString(), d.Name))
+            .OrderBy(s => s.Name)
+            .Select(s => new ValueResponse(s.Id.ToString(), s.Name))
             .ToListAsync();
 
         return new GetValuesResponse(values);

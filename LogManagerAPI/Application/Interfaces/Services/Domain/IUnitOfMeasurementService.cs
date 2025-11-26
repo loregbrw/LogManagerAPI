@@ -7,5 +7,5 @@ using Application.Models.Responses.Value;
 
 public interface IUnitOfMeasurementService : IBaseService<UnitOfMeasurement, UnitOfMeasurementDto>
 {
-    Task<GetValuesResponse> GetUnitOfMeasurementValues();
+    Task<GetValuesResponse> GetUnitOfMeasurementValuesAsync();
 }

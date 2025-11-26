@@ -18,11 +18,11 @@ public class UnitOfMeasurementService(
 
     private readonly IUnitOfMeasurementRepository _repo = repository;
 
-    public async Task<GetValuesResponse> GetUnitOfMeasurementValues()
+    public async Task<GetValuesResponse> GetUnitOfMeasurementValuesAsync()
     {
         var values = await _repo.GetAllAsNoTracking()
-            .OrderBy(d => d.Name)
-            .Select(d => new ValueResponse(d.Id.ToString(), d.Name))
+            .OrderBy(u => u.Name)
+            .Select(u => new ValueResponse(u.Id.ToString(), u.Name))
             .ToListAsync();
 
         return new GetValuesResponse(values);

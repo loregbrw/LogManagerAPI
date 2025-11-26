@@ -13,7 +13,7 @@ public class StockSubgroupController : ControllerBase
         [FromServices] IStockSubgroupService service
     )
     {
-        var result = await service.GetStockSubgroupValues();
+        var result = await service.GetStockSubgroupValuesAsync();
         return Ok(result);
     }
 

@@ -6,9 +6,11 @@ using Application.Interfaces.Services.Domain.Primitives;
 using Application.Models.Entities;
 using Application.Models.Responses.Csv;
 using Application.Models.Responses.StockItem;
+using Application.Models.Responses.Value;
 
 public interface IStockItemService : IBaseService<StockItem, StockItemDto>
 {
+    Task<GetValuesResponse> GetStockItemValuesAsync();
     Task<PaginatedStockItemResponse> GetPaginatedStockItemsAsync(
         int page,
         int size,

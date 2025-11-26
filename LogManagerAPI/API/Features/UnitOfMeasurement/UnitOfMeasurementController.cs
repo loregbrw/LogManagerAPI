@@ -12,7 +12,7 @@ public class UnitOfMeasurementController : ControllerBase
         [FromServices] IUnitOfMeasurementService service
     )
     {
-        var result = await service.GetUnitOfMeasurementValues();
+        var result = await service.GetUnitOfMeasurementValuesAsync();
         return Ok(result);
     }
 

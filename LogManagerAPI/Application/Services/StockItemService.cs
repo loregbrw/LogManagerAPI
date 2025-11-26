@@ -13,6 +13,7 @@ using Application.Models.Entities;
 using Application.Models.Requests.StockItem;
 using Application.Models.Responses.Csv;
 using Application.Models.Responses.StockItem;
+using Application.Models.Responses.Value;
 using Application.Services.Primitives;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,17 @@ public class StockItemService(
     private readonly IStockDepartmentRepository _stockDepartmentRepository = stockDepartmentRepository;
     private readonly IStockSubgroupRepository _stockSubgroupRepository = stockSubgroupRepository;
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
+    
+    public async Task<GetValuesResponse> GetStockItemValuesAsync()
+    {
+        var values = await _repo.GetAllAsNoTracking()
+            .OrderBy(s => s.Code)
+            .Select(s => new ValueResponse(s.Id.ToString(), $"{s.Code} ({s.Description})"))
+            .ToListAsync();
+
+        return new GetValuesResponse(values);
+    }
+
 
     public async Task<PaginatedStockItemResponse> GetPaginatedStockItemsAsync(
         int page,

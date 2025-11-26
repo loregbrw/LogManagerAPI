@@ -20,7 +20,7 @@ public class StockDepartmentService(
     private readonly IStockDepartmentRepository _repo = repository;
     private readonly IStockDepartmentMapper _mapper = mapper;
 
-    public async Task<GetValuesResponse> GetStockDepartmentValues()
+    public async Task<GetValuesResponse> GetStockDepartmentValuesAsync()
     {
         var values = await _repo.GetAllAsNoTracking()
             .OrderBy(d => d.Name)

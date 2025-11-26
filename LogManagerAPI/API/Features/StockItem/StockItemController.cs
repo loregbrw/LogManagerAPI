@@ -10,15 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/stock-items")]
 public class StockItemController : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> GetStockItems(
+    [HttpGet("values")]
+    public async Task<IActionResult> GetStockItemValues(
         [FromServices] IStockItemService service
     )
     {
-        var result = await service.GetAllAsync();
+        var result = await service.GetStockItemValuesAsync();
         return Ok(result);
     }
-
     [HttpGet("paginated")]
     public async Task<IActionResult> GetPaginatedStockItems(
         [FromServices] GetPaginatedStockItemsHandler handler,

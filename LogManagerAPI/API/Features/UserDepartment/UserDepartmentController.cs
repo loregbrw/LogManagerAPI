@@ -12,7 +12,7 @@ public class UserDepartmentController : ControllerBase
         [FromServices] IUserDepartmentService service
     )
     {
-        var result = await service.GetUserDepartmentValues();
+        var result = await service.GetUserDepartmentValuesAsync();
         return Ok(result);
     }
 }

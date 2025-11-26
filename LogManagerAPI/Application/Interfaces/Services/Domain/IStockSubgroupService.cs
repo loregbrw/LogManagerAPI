@@ -8,6 +8,6 @@ using Application.Models.Responses.Value;
 
 public interface IStockSubgroupService : IBaseService<StockSubgroup, StockSubgroupDto>
 {
-    Task<GetValuesResponse> GetStockSubgroupValues();
+    Task<GetValuesResponse> GetStockSubgroupValuesAsync();
     Task<StockSubgroupDto> CreateStockSubGroupAsync(CreateStockSubgroupPayload payload);
 }
