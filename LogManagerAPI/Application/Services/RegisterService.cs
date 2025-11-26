@@ -76,7 +76,7 @@ public class RegisterService(
                 EF.Functions.ILike(r.StockItem.Description!, $"%{search}%"));
 
         return await query
-            .Include(r => r.StockItem)
+            .Include(r => r.StockItem.UnitOfMeasurement)
             .OrderByDescending(r => r.Date)
             .ThenByDescending(r => r.CreatedAt)
             .ToPaginatedResultAsync(_mapper, page, size);
