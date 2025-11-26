@@ -1,6 +1,7 @@
 ﻿namespace Application.Services;
 
 using Application.Entities;
+using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces.Mappers;
 using Application.Interfaces.Providers;
@@ -17,7 +18,7 @@ public class RegisterService(
 {
     private readonly IRegisterRepository _repo = repository;
     private readonly IRegisterMapper _mapper = mapper;
-    private readonly IUserRepository  _userRepo = userRepository;
+    private readonly IUserRepository _userRepo = userRepository;
     private readonly IStockItemRepository _stockItemRepo = stockItemRepository;
     private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
@@ -25,6 +26,26 @@ public class RegisterService(
     {
         var user = await _userRepo.GetByIdAsync(userId) ?? throw new NotFoundException("EntityNotFound", typeof(User));
         var stockItem = await _stockItemRepo.GetByIdAsync(payload.StockItemId) ?? throw new NotFoundException("EntityNotFound", typeof(StockItem));
+
+        switch (payload.RegisterType)
+        {
+            case ERegisterType.INBOUND:
+                stockItem.Inbound += (long)payload.Amount;
+                stockItem.Current += (long)payload.Amount;
+                break;
+
+            case ERegisterType.OUTBOUND:
+                if (payload.Amount > stockItem.Current)
+                    throw new BadRequestException("InsufficientBalance");
+
+                stockItem.Outbound += (long)payload.Amount;
+                stockItem.Current -= (long)payload.Amount;
+                break;
+
+            case ERegisterType.FIX:
+                stockItem.Current = (long)payload.Amount;
+                break;
+        }
 
         var Register = new Register()
         {
