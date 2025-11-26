@@ -1,5 +1,6 @@
 ﻿namespace API.Features.Register;
 
+using API.Features.Register.Get;
 using API.Features.Register.Post;
 using Application.Models.Requests.Register;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,15 @@ public class RegisterController : ControllerBase
     )
     {
         var result = await handler.HandleAsync(payload);
+        return Ok(result);
+    }
+
+    [HttpGet("paginated")]
+    public async Task<IActionResult> GetPaginatedRegisters(
+        [FromServices] GetPaginatedRegistersHandler handler, [FromQuery] string? query, [FromQuery] int? page, [FromQuery] int? count
+    )
+    {
+        var result = await handler.HandleAsync(query, page, count);
         return Ok(result);
     }
 }

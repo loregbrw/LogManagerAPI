@@ -3,13 +3,16 @@
 using Application.Entities;
 using Application.Enums;
 using Application.Exceptions;
+using Application.Extensions;
 using Application.Interfaces.Mappers;
 using Application.Interfaces.Providers;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services.Domain;
 using Application.Models.Entities;
+using Application.Models.Pagination;
 using Application.Models.Requests.Register;
 using Application.Services.Primitives;
+using Microsoft.EntityFrameworkCore;
 
 public class RegisterService(
     IRegisterRepository repository, IUserRepository userRepository, IStockItemRepository stockItemRepository,
@@ -61,5 +64,21 @@ public class RegisterService(
         await _repo.SaveChangesAsync();
 
         return _mapper.ToDto(Register);
+    }
+
+    public async Task<PaginatedResult<RegisterDto>> GetPaginatedRegistersAsync(int page, int size, string? search = null)
+    {
+        var query = _repo.GetAllAsNoTracking();
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(r =>
+                EF.Functions.ILike(r.StockItem.Code, $"%{search}%") ||
+                EF.Functions.ILike(r.StockItem.Description!, $"%{search}%"));
+
+        return await query
+            .Include(r => r.StockItem)
+            .OrderByDescending(r => r.Date)
+            .ThenByDescending(r => r.CreatedAt)
+            .ToPaginatedResultAsync(_mapper, page, size);
     }
 }
